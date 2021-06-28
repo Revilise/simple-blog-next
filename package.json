@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Revilise/simple-blog.git"
@@ -15,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/Revilise/simple-blog/issues"
   },
-  "homepage": "https://github.com/Revilise/simple-blog#readme"
+  "homepage": "https://github.com/Revilise/simple-blog#readme",
+  "dependencies": {
+    "json-server": "^0.16.3"
+  }
 }
