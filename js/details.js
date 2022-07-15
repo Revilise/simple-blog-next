@@ -24,7 +24,7 @@ btn.addEventListener("click", async (e) => {
     method: 'DELETE'
   })
 
-  window.location.replace('/index.html')
+  window.location.href = window.location.href.replace("details.html", "index.html")
 })
 
 window.addEventListener('DOMContentLoaded', () => render())

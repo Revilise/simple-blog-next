@@ -11,11 +11,11 @@ const create = async (e) => {
 
   await fetch('http://localhost:3000/posts', {
     method: 'POST',
-    body: JSON.stringify(newPost), // parse from POJO to JSON
+    body: JSON.stringify(newPost),
     headers: {'Content-Type': 'application/json'}
   })
 
-  window.location.replace('/index.html')
+  window.location.href = window.location.href.replace("create.html", "index.html")
 }
 
 form.addEventListener("submit", create)
