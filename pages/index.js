@@ -1,15 +1,28 @@
-import Link from "next/link";
 import Layout from "../components/layout/layout";
+import PostsList from "../components/PostsList/PostsList";
+import {getAllPostIds, getAllPosts} from "../db/controllers/posts.controller";
+import {useEffect, useState} from "react";
 
-export default function Home() {
+export async function getStaticProps({params}) {
+
+    const posts = await getAllPosts()
+    return {
+        props: {
+            posts
+        }
+    }
+}
+
+export default function Home({posts}) {
+
     return (
         <Layout title={"home"}>
-            <Link href={"/posts"}>
-                <a>posts link</a>
-            </Link>
-            <Link href={"/create-post"}>
-                <a>go to single post</a>
-            </Link>
+
+            <PostsList posts={posts} />
         </Layout>
     )
 }
+
+
+
+

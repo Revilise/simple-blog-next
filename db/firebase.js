@@ -1,19 +1,15 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, set, ref, get } from "firebase/database";
+import { getFirestore } from "firebase/firestore"
 
 const firebaseConfig = {
-    databaseURL: "https://simple-blog-84f45.europe-west3.firebaseio.com",
+    apiKey: "AIzaSyBgZO4sDQVlCIVyldN3vDjGganAInFdi2w",
+    authDomain: "simple-blog-7cd06.firebaseapp.com",
+    databaseURL: "https://simple-blog-7cd06-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "simple-blog-7cd06",
+    storageBucket: "simple-blog-7cd06.appspot.com",
+    messagingSenderId: "304034080428",
+    appId: "1:304034080428:web:050cd191cb0512fc32e109"
 };
-const app = initializeApp(firebaseConfig);
 
-const database = getDatabase(app);
-
-export function getPostById(id) {
-    get(ref(database, 'posts/post/'+id)).then(result => {
-        if (result.exists()) {
-            console.log(`value: ${result.val()}`);
-            return;
-        }
-        console.log("no such values")
-    })
-}
+export const app = initializeApp(firebaseConfig);
+export const database = getFirestore(app);

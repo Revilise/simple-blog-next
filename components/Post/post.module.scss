@@ -1,0 +1,29 @@
+@mixin flex {
+  gap: 16px;
+  display: flex;
+}
+
+.container {
+  @include flex;
+  flex-direction: column;
+  padding: 16px;
+  cursor: pointer;
+  &:hover {
+    background: #FFFFFF;
+  }
+  .header {
+    @include flex;
+    .title {
+      width: 100%;
+    }
+    .date {
+      min-width: fit-content;
+      font-size: 13px;
+    }
+  }
+
+  .description {
+    font-family: sans-serif;
+    font-weight: normal;
+  }
+}

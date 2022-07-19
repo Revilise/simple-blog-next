@@ -1,7 +1,9 @@
+import Layout from "../components/layout/layout";
+
 export default function CreatePost() {
     return (
-        <div>
+        <Layout title={"create post"}>
             create post
-        </div>
+        </Layout>
     )
 }
