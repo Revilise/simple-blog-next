@@ -34,3 +34,15 @@
     gap: 24px;
     align-items: center;
 }
+
+.layout {
+    width: 968px;
+    display: flex;
+    gap: 16px;
+    &.horizontal {
+        flex-direction: row;
+    }
+    &.vertical {
+        flex-direction: column;
+    }
+}

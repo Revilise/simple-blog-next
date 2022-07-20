@@ -17,4 +17,12 @@ Button.Round = function RoundButton({children, onClick}) {
         </div>
     )
 }
+
+Button.Submit = function SubmitButton({children, onSubmit}) {
+    return (
+        <button type={"submit"} onClick={onSubmit} className={`${classes.button} ${classes.submit}`}>
+            {children}
+        </button>
+    )
+}
 export default Button;

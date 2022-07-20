@@ -12,6 +12,12 @@
   color: #ffffff;
   cursor: pointer;
   transition: background .2s;
+  &.submit {
+    background: #49F08B;
+    &:hover {
+      background: #12DD64;
+    }
+  }
   &:hover {
     background: #EF8354;
   }

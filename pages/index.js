@@ -1,11 +1,10 @@
-import Layout from "../components/layout/layout";
+import Layout from "../components/Layout/Layout";
 import PostsList from "../components/PostsList/PostsList";
-import {getAllPostIds, getAllPosts} from "../db/controllers/posts.controller";
-import {useEffect, useState} from "react";
+import postsController from "../db/controllers/posts.controller";
 
 export async function getStaticProps({params}) {
+    const posts = await postsController.getAll()
 
-    const posts = await getAllPosts()
     return {
         props: {
             posts
@@ -14,10 +13,8 @@ export async function getStaticProps({params}) {
 }
 
 export default function Home({posts}) {
-
     return (
         <Layout title={"home"}>
-
             <PostsList posts={posts} />
         </Layout>
     )

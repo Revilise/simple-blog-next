@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Button from "../Button/Button";
 
-export default function Layout({children, title}) {
+function Layout({children, title, hideCreatePostButton}) {
     return (
         <div className={classes.container}>
             <Head>
@@ -15,13 +15,19 @@ export default function Layout({children, title}) {
                         <a>SIMPLE BLOG</a>
                     </h1>
                 </Link>
-                <Link href={"/create-post"}>
-                    <a>
-                        <Button>
-                            create
-                        </Button>
-                    </a>
-                </Link>
+                {
+                    !hideCreatePostButton ?
+                    (
+                        <Link href={"/create_post"}>
+                            <a>
+                                <Button>
+                                    create
+                                </Button>
+                            </a>
+                        </Link>
+                    ):
+                    <></>
+                }
             </header>
             <main className={classes.main}>
                 {children}
@@ -37,3 +43,18 @@ export default function Layout({children, title}) {
         </div>
     )
 }
+
+Layout.Linear = function LinearLayout({orientation, children, style}) {
+    return (
+        <div
+            style={style}
+            className={`
+             ${classes.layout} 
+             ${orientation ? classes[orientation] : ""}`
+        }>
+            {children}
+        </div>
+    )
+}
+
+export default Layout;

@@ -6,19 +6,27 @@ class PostsController {
     constructor() {
        this.dbInstance = collection(database, 'posts');
     }
-    getAllPosts = () => {
+    getAll = () => {
         return getDocs(this.dbInstance)
             .then(res => res.docs.map((item) => {
-                return {...item.data(), id: item.id}
+                const data = item.data();
+                const date = new Date();
+                date.setUTCDate(data.date);
+                return {...data, date: date.toDateString(), id: item.id}
         }))
     }
-    getAllPostIds = () => {
+    getAllIds = () => {
         return getDocs(this.dbInstance)
             .then(res => res.docs.map(item => {
                 return {id: item.id}
             }))
     }
+    post = ({title, content, description, date}) => {
+        addDoc(this.dbInstance, {title, content, description, date})
+            .catch((err) => console.error(err))
+    }
 }
 
-const controller = new PostsController();
-export const { getAllPosts, getAllPostIds } = controller;
+const postsController = new PostsController();
+
+export default postsController;
