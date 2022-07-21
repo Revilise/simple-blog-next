@@ -1,5 +1,5 @@
 import { database, app } from "../firebase";
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore';
 
 class PostsController {
     dbInstance = null;
@@ -7,11 +7,15 @@ class PostsController {
        this.dbInstance = collection(database, 'posts');
     }
     getAll = () => {
-        return getDocs(this.dbInstance)
+
+        const q = query(this.dbInstance, orderBy("date", "desc"));
+
+        return getDocs(q)
             .then(res => res.docs.map((item) => {
                 const data = item.data();
                 const date = new Date();
                 date.setUTCDate(data.date);
+
                 return {...data, date: date.toDateString(), id: item.id}
         }))
     }
@@ -22,8 +26,14 @@ class PostsController {
             }))
     }
     post = ({title, content, description, date}) => {
-        addDoc(this.dbInstance, {title, content, description, date})
-            .catch((err) => console.error(err))
+        return new Promise((res, rej) => {
+            addDoc(this.dbInstance, {title, content, description, date})
+                .then(() => res())
+                .catch((err) => {
+                    console.error(err)
+                    rej();
+                })
+        })
     }
 }
 

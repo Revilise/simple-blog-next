@@ -1,6 +1,6 @@
 import Layout from "../components/Layout/Layout";
 import Textarea from "../components/Textarea/Textarea";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Button from "../components/Button/Button";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
@@ -17,9 +17,11 @@ export default function CreatePost() {
 
         postsController.post({
             title, content, description, date
-        })
+        }).then(() => redirectToHome())
+
+        e.preventDefault();
     }
-    function toHome() {
+    function redirectToHome() {
         router.replace('/pages')
     }
     return (
@@ -30,7 +32,7 @@ export default function CreatePost() {
                 <Layout.Linear
                     orientation={"horizontal"}
                     style={{paddingBottom: "16px"}}>
-                    <Button onClick={toHome}>Come back</Button>
+                    <Button onClick={redirectToHome}>Come back</Button>
                     <Button.Submit>Publish</Button.Submit>
                 </Layout.Linear>
                 <Layout.Linear
