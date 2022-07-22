@@ -1,4 +1,5 @@
 import classes from './button.module.scss';
+import {useRouter} from "next/router";
 
 function Button({children, onClick}) {
     return (
@@ -23,6 +24,14 @@ Button.Submit = function SubmitButton({children, onSubmit}) {
         <button type={"submit"} onClick={onSubmit} className={`${classes.button} ${classes.submit}`}>
             {children}
         </button>
+    )
+}
+
+
+Button.RedirectToHome = function RedirectToHomeButton() {
+    const router = useRouter();
+    return (
+        <Button onClick={() => router.replace('/pages')}>Come back</Button>
     )
 }
 export default Button;

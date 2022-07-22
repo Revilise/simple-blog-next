@@ -2,8 +2,9 @@ import classes from './layout.module.scss'
 import Head from "next/head";
 import Link from "next/link";
 import Button from "../Button/Button";
+import {useRouter} from "next/router";
 
-function Layout({children, title, hideCreatePostButton}) {
+function Layout({children, title, hideCreatePostButton, pathToIconsDir}) {
     return (
         <div className={classes.container}>
             <Head>
@@ -35,7 +36,7 @@ function Layout({children, title, hideCreatePostButton}) {
             <footer className={classes.footer}>
                 <a href={"https://github.com/Revilise"} target={"_blank"}>
                     <Button.Round>
-                        <img src={"./icons/github.svg"} alt={"github icon"} />
+                        <img src={pathToIconsDir ? pathToIconsDir+"/github.svg" :"./icons/github.svg"} alt={"github icon"} />
                     </Button.Round>
                 </a>
                 <p>developed by Revilise (c) <span>{(new Date()).getFullYear()}</span></p>

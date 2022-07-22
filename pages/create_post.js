@@ -17,12 +17,9 @@ export default function CreatePost() {
 
         postsController.post({
             title, content, description, date
-        }).then(() => redirectToHome())
+        }).then(() => router.replace('/pages'))
 
         e.preventDefault();
-    }
-    function redirectToHome() {
-        router.replace('/pages')
     }
     return (
         <Layout
@@ -32,7 +29,7 @@ export default function CreatePost() {
                 <Layout.Linear
                     orientation={"horizontal"}
                     style={{paddingBottom: "16px"}}>
-                    <Button onClick={redirectToHome}>Come back</Button>
+                    <Button.RedirectToHome />
                     <Button.Submit>Publish</Button.Submit>
                 </Layout.Linear>
                 <Layout.Linear
