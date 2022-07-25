@@ -1,5 +1,4 @@
 import classes from "./PostDetails.module.scss";
-import Layout from "../Layout/Layout";
 
 export default function PostDetails({title, description, content, date}) {
     return (

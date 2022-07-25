@@ -37,17 +37,15 @@ class PostsController {
             }))
     }
     post = ({title, content, description, date}) => {
-        return new Promise((res, rej) => {
-            const d = new Date();
-            d.setUTCDate(date);
-            const id = `${translitRuEn(title)}__${d.getDay()}_${d.getMonth()}_${d.getSeconds()}`
-            addDoc(this.dbInstance, {title, content, description, date, id})
-                .then(() => res())
-                .catch((err) => {
-                    console.error(err)
-                    rej();
-                })
-        })
+
+        const d = new Date();
+        d.setUTCDate(date);
+        const id = `${translitRuEn(title)}__${d.getDay()}_${d.getMonth()}_${d.getSeconds()}`
+        return addDoc(this.dbInstance, {title, content, description, date, id})
+            .then((res) => res)
+            .catch((err) => {
+                console.error(err)
+            })
     }
 }
 

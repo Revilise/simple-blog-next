@@ -35,6 +35,7 @@ export default function CreatePost() {
                 <Layout.Linear
                     orientation={"vertical"}
                 >
+                    {/*todo: add react utils*/}
                     <Textarea
                         key={1}
                         value={title}
