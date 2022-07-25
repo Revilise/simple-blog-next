@@ -1,6 +1,6 @@
 import Layout from "../components/Layout/Layout";
 import Textarea from "../components/Textarea/Textarea";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Button from "../components/Button/Button";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
@@ -9,18 +9,33 @@ export default function CreatePost() {
     const [title, changeTitle] = useState("");
     const [description, changeDescription] = useState("");
     const [content, changeContent] = useState("");
+    const [isLoading, changeIsLoading] = useState(false);
 
     const router = useRouter();
 
     const publishPost = (e) => {
         const date = (new Date()).getUTCDate();
 
+        changeIsLoading(true);
         postsController.post({
             title, content, description, date
         }).then(() => router.replace('/pages'))
-
         e.preventDefault();
     }
+    // todo: Уведомление об успешном добавлении либо крутилку
+
+    useEffect(() => {
+        // ignore
+    }, [isLoading])
+
+    if (isLoading) {
+        return (
+            <Layout title={"creating post"}>
+                <p>Пост обрабатывается..</p>
+            </Layout>
+        )
+    }
+
     return (
         <Layout
             hideCreatePostButton={true}
