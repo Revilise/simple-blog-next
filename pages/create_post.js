@@ -20,6 +20,7 @@ export default function CreatePost() {
         postsController.post({
             title, content, description, date
         }).then(() => router.replace('/pages'))
+        changeIsLoading(false);
         e.preventDefault();
     }
     // todo: Уведомление об успешном добавлении либо крутилку
