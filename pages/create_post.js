@@ -21,7 +21,6 @@ export default function CreatePost() {
         postsController.post({
             title, content, description, date
         }).then(() => {
-            changeIsLoading(false);
             router.replace('/pages')
         })
 
@@ -58,18 +57,21 @@ export default function CreatePost() {
                     {/*todo: add react utils*/}
                     <Textarea
                         key={1}
+                        required={true}
                         value={title}
                         onChange={(e) => changeTitle(e.target.value)}
                         hint={"title"}
                     />
                     <Textarea
                         key={2}
+                        required={true}
                         value={description}
                         onChange={(e) => changeDescription(e.target.value)}
                         hint={"description"}
                     />
                     <Textarea
                         key={3}
+                        required={true}
                         value={content}
                         onChange={(e) => changeContent(e.target.value)}
                         hint={"content"}
