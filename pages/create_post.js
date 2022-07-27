@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import Button from "../components/Button/Button";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
+import Loading from "../components/Loading/Loading";
 
 export default function CreatePost() {
     const [title, changeTitle] = useState("");
@@ -19,8 +20,11 @@ export default function CreatePost() {
         changeIsLoading(true);
         postsController.post({
             title, content, description, date
-        }).then(() => router.replace('/pages'))
-        changeIsLoading(false);
+        }).then(() => {
+            changeIsLoading(false);
+            router.replace('/pages')
+        })
+
         e.preventDefault();
     }
     // todo: Уведомление об успешном добавлении либо крутилку
@@ -32,7 +36,7 @@ export default function CreatePost() {
     if (isLoading) {
         return (
             <Layout title={"creating post"}>
-                <p>Пост обрабатывается..</p>
+                <Loading />
             </Layout>
         )
     }

@@ -1,0 +1,32 @@
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  .point {
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    background: #2D3142;
+    border-radius: 100%;
+    animation: appear .6s ease infinite;
+  }
+}
+@for $i from 1 through 3 {
+  .point:nth-child(#{$i}) {
+    animation-delay: #{$i / 6}s;
+  }
+}

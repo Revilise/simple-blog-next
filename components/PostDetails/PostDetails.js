@@ -1,4 +1,4 @@
-import classes from "./PostDetails.module.scss";
+import classes from "./postDetails.module.scss";
 
 export default function PostDetails({title, description, content, date}) {
     return (
