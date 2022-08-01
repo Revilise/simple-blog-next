@@ -1,0 +1,31 @@
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  gap: 24px;
+  grid-area: sidebar;
+  @include flex-column;
+  & > div, & > nav {
+    background: var(--lt-plates-background);
+    padding: 16px;
+    gap: 12px;
+    border-radius: 16px;
+    border: 1px solid #F2F2F2;
+    @include flex-column
+  }
+}
+
+.social_link {
+  display: flex;
+  align-items: center;
+  padding: 12px 8px 12px 16px;
+  gap: 24px;
+  .title {
+
+  }
+  .link {
+    font-size: 14px;
+  }
+}

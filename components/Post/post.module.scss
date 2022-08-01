@@ -6,10 +6,14 @@
 .container {
   @include flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 16px 24px;
   cursor: pointer;
+  border: 1px solid #F2F2F2;
+  transition: background 0.2s;
+  background: var(--lt-plates-background);
+  border-radius: 16px;
   &:hover {
-    background: #FFFFFF;
+    background: var(--lt-hovered-plates-background);
   }
   .header {
     @include flex;

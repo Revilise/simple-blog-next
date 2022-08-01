@@ -1,0 +1,14 @@
+.header {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+
+  .header_title {
+    font-size: 27px;
+    font-weight: bolder;
+    cursor: pointer;
+    color: var(--lt-primary);
+    &:hover {
+      color: var(--lt-hovered-primary);
+    }
+  }
+}
