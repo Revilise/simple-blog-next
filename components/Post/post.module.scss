@@ -12,6 +12,7 @@
   transition: background 0.2s;
   background: var(--lt-plates-background);
   border-radius: 16px;
+  font-family: Arial, sans-serif;
   &:hover {
     background: var(--lt-hovered-plates-background);
   }

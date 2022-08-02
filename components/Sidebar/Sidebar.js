@@ -16,7 +16,7 @@ export default function Sidebar() {
                 </Link.Button>
                 <SocialLink url={"vk.com/Revilise"} socialName={"vk"} Img={Vk} />
                 <SocialLink url={"tl.com/Revilise"} socialName={"Telegram"} Img={Telegram} />
-                <SocialLink url={"portfolio.com/Revilise"} socialName={"Site"} Img={WideWorldNet} />
+                <SocialLink url={"portf.com/Revilise"} socialName={"Site"} Img={WideWorldNet} />
             </div>
         </aside>
     )

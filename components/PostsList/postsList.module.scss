@@ -3,4 +3,7 @@
   flex-direction: column;
   gap: 24px;
   grid-area: main;
+  & a:hover {
+    color: var(--lt-main-font-color) !important;
+  }
 }
