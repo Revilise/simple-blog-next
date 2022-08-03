@@ -1,6 +1,7 @@
 .header {
   display: grid;
   grid-template-columns: 2fr 4fr 2fr;
+  gap: 24px;
 
   .header_title {
     font-size: 27px;

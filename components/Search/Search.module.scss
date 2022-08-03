@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  border: 3px solid #87B2E6;
+  border-radius: 8px;
+  align-items: center;
+  .input {
+    width: 100%;
+    padding: 8px 8px 8px 12px;
+    border: none;
+    background: none;
+    outline: none;
+    font-weight: bold;
+    &::placeholder {
+      color: var(--lt-span-font-color);
+      font-size: 16px;
+      line-height: 18px;
+      font-weight: normal;
+    }
+  }
+
+  .button {
+    background: none;
+    padding: 6px;
+    border: none;
+    display: flex;
+    outline: none;
+    cursor: pointer;
+    height: content-box;
+
+  }
+}
