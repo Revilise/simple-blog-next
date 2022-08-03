@@ -1,0 +1,16 @@
+.textarea {
+  font-size: 18px;
+  line-height: 27px;
+  resize: none;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--lt-main-font-color);
+  &::placeholder {
+    color: var(--lt-span-font-lighter);
+  }
+}
+.title {
+  font-size: 36px;
+  line-height: 54px;
+}

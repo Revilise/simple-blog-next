@@ -1,10 +1,12 @@
 import Layout from "../components/Layout/Layout";
-import Textarea from "../components/Textarea/Textarea";
 import {useEffect, useState} from "react";
 import Button from "../components/Button/Button";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
 import Loading from "../components/Loading/Loading";
+import Header from "../components/Header/Header";
+import Main from "../components/Main/Main";
+import Textarea from "../components/Textarea/Textarea";
 
 export default function CreatePost() {
     const [title, changeTitle] = useState("");
@@ -15,6 +17,7 @@ export default function CreatePost() {
     const router = useRouter();
 
     const publishPost = (e) => {
+        e.preventDefault();
         const date = (new Date()).getUTCDate();
 
         changeIsLoading(true);
@@ -23,10 +26,7 @@ export default function CreatePost() {
         }).then(() => {
             router.replace('/pages')
         })
-
-        e.preventDefault();
     }
-    // todo: Уведомление об успешном добавлении либо крутилку
 
     useEffect(() => {
         // ignore
@@ -41,43 +41,22 @@ export default function CreatePost() {
     }
 
     return (
-        <Layout
-            hideCreatePostButton={true}
-            title={"create post"}>
-            <form  onSubmit={publishPost}>
-                <Layout.Linear
-                    orientation={"horizontal"}
-                    style={{paddingBottom: "16px"}}>
-                    <Button.RedirectToHome />
-                    <Button.Submit>Publish</Button.Submit>
-                </Layout.Linear>
-                <Layout.Linear
-                    orientation={"vertical"}
-                >
-                    {/*todo: add react utils*/}
-                    <Textarea
-                        key={1}
-                        required={true}
-                        value={title}
-                        onChange={(e) => changeTitle(e.target.value)}
-                        hint={"title"}
-                    />
-                    <Textarea
-                        key={2}
-                        required={true}
-                        value={description}
-                        onChange={(e) => changeDescription(e.target.value)}
-                        hint={"description"}
-                    />
-                    <Textarea
-                        key={3}
-                        required={true}
-                        value={content}
-                        onChange={(e) => changeContent(e.target.value)}
-                        hint={"content"}
-                    />
-                </Layout.Linear>
-            </form>
+        <Layout title={"create post"}>
+            <Header />
+            <Main>
+                <Main.Section>
+                    <Layout.Container>
+                        <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle} />
+                        <Textarea placeholder={'Description'} value={description} changeHandle={changeDescription} />
+                        <Textarea placeholder={'Begin imagine!'} value={content} changeHandle={changeContent} />
+                    </Layout.Container>
+                </Main.Section>
+                <Main.Aside>
+                    <Layout.Container>
+                        <Button onClick={publishPost}>publish</Button>
+                    </Layout.Container>
+                </Main.Aside>
+            </Main>
         </Layout>
     )
 }

@@ -1,15 +1,16 @@
 import classes from './sidebar.module.scss'
 import Link from "../Link/Link";
 import {Github, Telegram, Vk, WideWorldNet} from "../SvgIcons/SvgIcons";
+import Layout from "../Layout/Layout";
 
 export default function Sidebar() {
     return (
         <aside className={classes.container}>
-            <nav className={classes.primary_navigation}>
+            <Layout.Container>
                 <Link href={'/about_project'}>about project</Link>
                 <Link href={'/support'}>support</Link>
-            </nav>
-            <div className={classes.links}>
+            </Layout.Container>
+            <Layout.Container>
                 <Link.Button href={'https://github.com/Revilise'}>
                     <Github/>
                     project's git
@@ -17,7 +18,7 @@ export default function Sidebar() {
                 <SocialLink url={"vk.com/Revilise"} socialName={"vk"} Img={Vk} />
                 <SocialLink url={"tl.com/Revilise"} socialName={"Telegram"} Img={Telegram} />
                 <SocialLink url={"portf.com/Revilise"} socialName={"Site"} Img={WideWorldNet} />
-            </div>
+            </Layout.Container>
         </aside>
     )
 }

@@ -6,10 +6,20 @@
     grid-area: aside;
     grid-column-start: 1;
     grid-column-end: 3;
+    & + .section {
+      grid-area: section;
+      grid-column-start: 3;
+      grid-column-end: 9;
+    }
   }
   .section {
     grid-area: section;
-    grid-column-start: 3;
-    grid-column-end: 9;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    + .aside {
+      grid-area: aside;
+      grid-column-start: 7;
+      grid-column-end: 9;
+    }
   }
 }

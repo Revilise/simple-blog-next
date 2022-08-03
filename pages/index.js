@@ -25,8 +25,8 @@ export default function Home({posts}) {
                 <Link.Button href={'/create_post'}>create new post</Link.Button>
             </Header>
             <Main>
-                <Main.Aside Component={<Sidebar />}/>
-                <Main.Section Component={<PostsList posts={posts} />} />
+                <Main.Aside children={<Sidebar />}/>
+                <Main.Section children={<PostsList posts={posts} />} />
             </Main>
         </Layout>
     )
