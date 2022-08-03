@@ -1,26 +1,15 @@
 import classes from './main.module.scss'
 
-function Main({ children }) {
+function MainHOC({ children, type }) {
     return (
-        <div className={classes.container}>
+        <div className={classes[type]}>
             { children }
         </div>
     )
 }
 
-Main.Aside = ({ Component }) => {
-    return (
-        <div className={classes.aside}>
-            { Component }
-        </div>
-    )
-}
-Main.Section = ({ Component }) => {
-    return (
-        <div className={classes.section}>
-            { Component }
-        </div>
-    )
-}
+const Main = ({children}) => MainHOC({children, type: "container"});
+Main.Aside = ({children}) => MainHOC({children, type: "aside"});
+Main.Section = ({children}) => MainHOC({children, type: "section"});
 
 export default Main;
