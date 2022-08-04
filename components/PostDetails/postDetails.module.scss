@@ -1,23 +1,30 @@
 .container {
   .header {
+    padding: 24px;
+    background: var(--lt-primary);
+    border-radius: 16px 16px 0 0;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 12px;
     .title {
-      margin-bottom: 16px;
+      color: var(--lt-sub-span-font-color);
+      font-size: 32px;
     }
     .date {
       font-size: 13px;
     }
   }
   .description {
-    font-size: 16px;
-    padding: 8px 12px;
-    background: #eee5e4;
-    margin: 16px 0;
-    border-radius: 4px;
-    line-height: 24px;
-  }
-  .content {
     font-size: 18px;
+    line-height: 24px;
+    color: var(--lt-sub-span-font-color);
+  }
+  .content > div {
+    font-size: 16px;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 0 0 16px 16px;
   }
 }

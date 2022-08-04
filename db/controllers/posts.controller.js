@@ -1,4 +1,4 @@
-import { database, app } from "../firebase";
+import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc } from 'firebase/firestore';
 import {translitRuEn} from "../../tools/tools";
 
@@ -8,15 +8,20 @@ class PostsController {
        this.dbInstance = collection(database, 'posts');
     }
     getOne = (url) => {
+        console.log(url, 'from function')
         const q = query(this.dbInstance, where("url", "==", url))
         return getDocs(q)
             .then(res => {
-                const doc = res.docs[0];
-                const data = doc.data();
-                const date = new Date();
-                date.setUTCDate(data.date)
-                return {...data, date: date.toDateString(), id: doc.id};
-            })
+                    const doc = res.docs[0];
+                    if (doc) {
+                        const data = doc.data();
+                        const date = new Date();
+                        date.setUTCDate(data.date)
+                        return {...data, date: date.toDateString(), id: doc.id};
+                    }
+                    return {empty: true}
+                }
+            )
     }
     getAll = () => {
         const q = query(this.dbInstance, orderBy("date", "desc"));
@@ -27,13 +32,6 @@ class PostsController {
                 date.setUTCDate(data.date);
                 return {...data, date: date.toDateString()}
         }))
-    }
-    getURLs = () => {
-        const q = query(this.dbInstance, orderBy("date", "desc"));
-        return getDocs(q)
-            .then(res => res.docs.map((item) => {
-                return item.data().url
-            }))
     }
     post = ({title, content, description, date}) => {
         const d = new Date();
