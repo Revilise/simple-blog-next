@@ -21,6 +21,12 @@ class PostsController {
                 }
             )
     }
+    getByString = (str) => {
+        return this.getAll().then(res => res.filter(data => {
+            const keys = [data.title, data.content, data.description];
+            return keys.some(key => key.includes(str));
+        }))
+    }
     getAll = () => {
         const q = query(this.dbInstance, orderBy("date", "desc"));
         return getDocs(q)
