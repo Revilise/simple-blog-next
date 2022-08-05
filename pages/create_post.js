@@ -19,11 +19,10 @@ export default function CreatePost() {
 
     const publishPost = (e) => {
         e.preventDefault();
-        const date = (new Date()).getUTCDate();
 
         changeIsLoading(true);
         postsController.post({
-            title, content, description, date
+            title, content, description
         }).then(() => {
             router.replace('/pages')
         })

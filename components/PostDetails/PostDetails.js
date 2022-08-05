@@ -9,10 +9,11 @@ export default function PostDetails(props) {
     if (empty) {
         return <div>not found 404</div>
     }
+    const d = new Date(date);
     return (
         <div className={classes.container}>
             <header className={classes.header}>
-                <span className={classes.date}>{date}</span>
+                <span className={classes.date}>{d.toDateString()}</span>
                 <h1 className={classes.title}>{title}</h1>
                 <div className={classes.description}>
                     {description}

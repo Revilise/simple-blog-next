@@ -14,9 +14,8 @@ class PostsController {
                     const doc = res.docs[0];
                     if (doc) {
                         const data = doc.data();
-                        const date = new Date();
-                        date.setUTCDate(data.date)
-                        return {...data, date: date.toDateString(), id: doc.id};
+                        const date = new Date(data.date);
+                        return {...data, date, id: doc.id};
                     }
                     return {empty: true}
                 }
@@ -27,15 +26,16 @@ class PostsController {
         return getDocs(q)
             .then(res => res.docs.map((item) => {
                 const data = item.data();
-                const date = new Date();
-                date.setUTCDate(data.date);
-                return {...data, date: date.toDateString()}
+                return {...data}
         }))
     }
-    post = ({title, content, description, date}) => {
-        const d = new Date();
-        d.setUTCDate(date);
-        const url = `${translitRuEn(title)}__${d.getDay()}_${d.getMonth()}_${d.getSeconds()}`
+    post = ({title, content, description}) => {
+        const date = Number(new Date());
+
+        // todo: можно писать путь author/title с указанием полной даты.
+        //  Тогда разные авторы смогут постить одинаковые называния.
+
+        const url = `${translitRuEn(title)}_${date}`
         return addDoc(this.dbInstance, {title, content, description, date, url})
     }
     deleteById = async (id) => {
