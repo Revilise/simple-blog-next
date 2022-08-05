@@ -16,3 +16,16 @@
     background: var(--lt-hovered-primary);
   }
 }
+
+// todo bordered btn
+.button.bordered {
+  border: 2px solid var(--lt-bordered-btn);
+  background: transparent;
+  box-sizing: border-box;
+  transition: .2s;
+  padding: 4px 12px 4px 12px;
+  width: fit-content;
+  &:hover {
+    background: var(--lt-bordered-btn-background);
+  }
+}

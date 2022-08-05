@@ -10,15 +10,14 @@ import Main from "../../components/Main/Main";
 import Search from "../../components/Search/Search";
 import Button from "../../components/Button/Button";
 
-export default function Post(props) {
+export default function Post() {
     const router = useRouter();
     const url = router.query.url;
     const [isFetch, changeIsFetch] = useState(false);
     const [data, setData] = useState(Object.create(null));
 
     function deletePost() {
-        const {id} = props;
-        postsController.deleteById(id).then(() => router.push('/pages'));
+        postsController.deleteById(data.id).then(() => router.push('/pages'));
     }
 
     useEffect(() => {
@@ -41,7 +40,7 @@ export default function Post(props) {
                     <Sidebar/>
                 </Main.Aside>
                 <Main.Section>
-                    { isFetch ? <Loading /> : <PostDetails {...data} />}
+                    { isFetch ? <Loading /> : <PostDetails {...data} deletePost={deletePost}/>}
                 </Main.Section>
             </Main>
         </Layout>

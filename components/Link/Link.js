@@ -3,40 +3,30 @@ import Button from "../Button/Button";
 
 function LinkHOC (props) {
     const router = useRouter();
-    const {Component, href} = props;
+    const Component = props.component;
 
     function redirect (e) {
         e.preventDefault();
-        router.push(href);
+        router.push(props.href);
     }
 
     return <Component {...props} redirect={redirect} />
 }
 
-const StringLink = ({children, redirect}) => {
-    return (
-        <a href={"#"} onClick={redirect}>
-            {children}
-            <style jsx>{`
-              a {
-                text-decoration: none;
-                color: #2D3142;
-                transition: color 0.2s;
-              }
+const StringLink = (props) => {
+    const data = {...props};
+    data.onClick = props.redirect;
 
-              a:hover {
-                color: var(--lt-span-font-color);
-              }
-            `}</style>
-        </a>
-    )
+    delete data.redirect;
+    delete data.component;
+
+    return <a href={"#"} {...data} />
 }
 
-const ButtonLink = ({children, redirect}) => {
-    return <Button onClick={redirect}>{children}</Button>
-}
+const ButtonLink = (props) => <Button {...props} onClick={props.redirect} />
 
-const Link = (props) => <LinkHOC {...props} Component={StringLink} />;
-Link.Button = (props) => <LinkHOC {...props} Component={ButtonLink} /> ;
+////// export
+const Link = (props) => <LinkHOC {...props} component={StringLink} />;
+Link.Button = (props) => <LinkHOC {...props} component={ButtonLink} /> ;
 
 export default Link;

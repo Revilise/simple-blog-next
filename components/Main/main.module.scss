@@ -1,23 +1,31 @@
+@mixin getAreaSettings ($area) {
+  #{'.' + $area} {
+    grid-area: $area;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
 .container {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(8, 1fr);
+  @include getAreaSettings(aside);
+  @include getAreaSettings(section);
+
   .aside {
-    grid-area: aside;
     grid-column-start: 1;
     grid-column-end: 3;
     & + .section {
-      grid-area: section;
       grid-column-start: 3;
       grid-column-end: 9;
     }
   }
   .section {
-    grid-area: section;
     grid-column-start: 1;
     grid-column-end: 7;
     + .aside {
-      grid-area: aside;
       grid-column-start: 7;
       grid-column-end: 9;
     }

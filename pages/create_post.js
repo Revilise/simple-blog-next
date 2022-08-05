@@ -7,6 +7,7 @@ import Loading from "../components/Loading/Loading";
 import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
 import Textarea from "../components/Textarea/Textarea";
+import {P, SpanLink} from "../components/SpecialTegs/SpecialTags";
 
 export default function CreatePost() {
     const [title, changeTitle] = useState("");
@@ -35,26 +36,34 @@ export default function CreatePost() {
     if (isLoading) {
         return (
             <Layout title={"creating post"}>
-                <Loading />
+                <Loading/>
             </Layout>
         )
     }
 
     return (
         <Layout title={"create post"}>
-            <Header />
+            <Header/>
             <Main>
                 <Main.Section>
                     <Layout.Container>
-                        <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle} />
-                        <Textarea placeholder={'Description'} value={description} changeHandle={changeDescription} />
-                        <Textarea placeholder={'Begin imagine!'} value={content} changeHandle={changeContent} />
+                        <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
+                        <Textarea placeholder={'Description'} value={description} changeHandle={changeDescription}/>
+                        <Textarea placeholder={'Begin imagine!'} value={content} changeHandle={changeContent}/>
                     </Layout.Container>
                 </Main.Section>
                 <Main.Aside>
                     <Layout.Container>
                         <Button onClick={publishPost}>publish</Button>
+                        <P>save in
+                            <SpanLink href={''}> drafts</SpanLink>
+                        </P>
                     </Layout.Container>
+                    <P>
+                        <SpanLink href={''}>
+                            Rules of publication
+                        </SpanLink>
+                    </P>
                 </Main.Aside>
             </Main>
         </Layout>

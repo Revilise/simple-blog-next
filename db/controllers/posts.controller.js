@@ -8,7 +8,6 @@ class PostsController {
        this.dbInstance = collection(database, 'posts');
     }
     getOne = (url) => {
-        console.log(url, 'from function')
         const q = query(this.dbInstance, where("url", "==", url))
         return getDocs(q)
             .then(res => {

@@ -1,0 +1,12 @@
+.central_paragraph {
+  text-align: center;
+  font-size: 18px;
+  font-family: Rubik, Serif, sans-serif;
+}
+.span, .span * {
+  color: var(--lt-span-font-color) !important;
+  cursor: pointer;
+  &:hover {
+    font-weight: bold;
+  }
+}

@@ -15,9 +15,17 @@ body {
     line-height: 27px;
     color: #2D3142;
 }
-
+a {
+    text-decoration: none;
+    color: var(--lt-main-font-color);
+}
+a:hover {
+    color: var(--lt-span-font-color);
+}
 :root {
     --lt-background: #ffffff;
+    --lt-bordered-btn: #ffffff;
+    --lt-bordered-btn-background: rgba(255,255,255, 0.3);
     --lt-primary: #87B2E6;
     --lt-hovered-primary: #8397DF;
     --lt-sub: #91EAE4;
