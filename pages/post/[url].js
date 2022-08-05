@@ -30,7 +30,7 @@ export default function Post() {
     }, [url])
 
     return (
-        <Layout>
+        <Layout title={"Sog"}>
             <Header>
                 <Search />
                 <Button onClick={() => router.push('/pages')}>back</Button>

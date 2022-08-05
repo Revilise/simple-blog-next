@@ -43,7 +43,10 @@ export default function CreatePost() {
 
     return (
         <Layout title={"create post"}>
-            <Header/>
+            <Header>
+                <div />
+                <Button onClick={() => router.replace('/pages')}>back</Button>
+            </Header>
             <Main>
                 <Main.Section>
                     <Layout.Container>
