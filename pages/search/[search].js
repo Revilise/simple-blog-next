@@ -18,8 +18,7 @@ export default function _Search() {
 
     return (
         <Layout title={"search..."}>
-            <Header>
-                <Search />
+            <Header search>
                 <Link.Button href={'/create_post'}>create new post</Link.Button>
             </Header>
             <Main>

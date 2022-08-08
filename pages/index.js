@@ -20,8 +20,7 @@ export async function getStaticProps({params}) {
 export default function Home({posts}) {
     return (
         <Layout title={"home"}>
-            <Header>
-                <Search />
+            <Header search>
                 <Link.Button href={'/create_post'}>create new post</Link.Button>
             </Header>
             <Main>

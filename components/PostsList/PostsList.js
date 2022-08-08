@@ -7,9 +7,7 @@ export default function PostsList({posts}) {
     return (
         <div className={classes.container}>
             {posts.map((elem, idx) => (
-                <Link key={idx} href={`post/${elem.url}`}>
-                    <Post {...elem} />
-                </Link>
+                <Post key={idx} {...elem} />
             ))}
         </div>
     )

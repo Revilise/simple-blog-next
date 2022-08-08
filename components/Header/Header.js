@@ -1,7 +1,8 @@
 import classes from "./header.module.scss";
 import Link from "next/link";
+import Search from "../Search/Search";
 
-function Header({ children, }) {
+function Header({ children, search }) {
     return (
         <header className={classes.header}>
             <Link href={"/"}>
@@ -9,6 +10,7 @@ function Header({ children, }) {
                     <a>Sog</a>
                 </h1>
             </Link>
+            { search ? <Search /> : <div /> }
             { children }
         </header>
     )

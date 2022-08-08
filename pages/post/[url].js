@@ -9,6 +9,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Main from "../../components/Main/Main";
 import Search from "../../components/Search/Search";
 import Button from "../../components/Button/Button";
+import Link from "../../components/Link/Link";
 
 export default function Post() {
     const router = useRouter();
@@ -31,9 +32,8 @@ export default function Post() {
 
     return (
         <Layout title={"Sog"}>
-            <Header>
-                <Search />
-                <Button onClick={() => router.push('/pages')}>back</Button>
+            <Header search>
+                <Link.Button href={'/create_post'}>create new post</Link.Button>
             </Header>
             <Main>
                 <Main.Aside>

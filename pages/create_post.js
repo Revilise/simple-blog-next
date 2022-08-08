@@ -8,6 +8,7 @@ import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
 import Textarea from "../components/Textarea/Textarea";
 import {P, SpanLink} from "../components/SpecialTegs/SpecialTags";
+import Link from "../components/Link/Link";
 
 export default function CreatePost() {
     const [title, changeTitle] = useState("");
@@ -43,8 +44,7 @@ export default function CreatePost() {
     return (
         <Layout title={"create post"}>
             <Header>
-                <div />
-                <Button onClick={() => router.replace('/pages')}>back</Button>
+                <Link.Button href={'/pages'}>back</Link.Button>
             </Header>
             <Main>
                 <Main.Section>
