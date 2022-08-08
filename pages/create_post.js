@@ -25,7 +25,7 @@ export default function CreatePost() {
         postsController.post({
             title, content, description
         }).then(() => {
-            router.replace('/pages')
+            router.push('/')
         })
     }
 

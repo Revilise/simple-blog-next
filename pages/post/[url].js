@@ -18,7 +18,7 @@ export default function Post() {
     const [data, setData] = useState(Object.create(null));
 
     function deletePost() {
-        postsController.deleteById(data.id).then(() => router.push('/pages'));
+        postsController.deleteById(data.id).then(() => router.push('/'));
     }
 
     useEffect(() => {
