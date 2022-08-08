@@ -27,6 +27,6 @@ const ButtonLink = (props) => <Button {...props} onClick={props.redirect} />
 
 ////// export
 const Link = (props) => <LinkHOC {...props} component={StringLink} />;
-Link.Button = (props) => <LinkHOC {...props} component={ButtonLink} /> ;
+Link.Button = (props) => <LinkHOC {...props} component={props.component ?? ButtonLink} />;
 
 export default Link;
