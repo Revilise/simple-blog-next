@@ -5,7 +5,8 @@
   "main": "pages/index.js",
   "scripts": {
     "start": "",
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build"
   },
   "repository": {
     "type": "git",
