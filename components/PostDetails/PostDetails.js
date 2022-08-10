@@ -1,7 +1,10 @@
+import DOMPurify from 'dompurify';
+
 import classes from "./postDetails.module.scss";
 import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
 import SvgIcons from "../SvgIcons/SvgIcons";
+import {convertTransfersToParagraph} from "../../tools/tools";
 
 export default function PostDetails(props) {
     const {title, description, content, date, deletePost, empty} = props;
@@ -9,6 +12,11 @@ export default function PostDetails(props) {
     if (empty) {
         return <div>not found 404</div>
     }
+
+    function translate() {
+        return convertTransfersToParagraph(DOMPurify.sanitize(content));
+    }
+
     const d = new Date(date);
     return (
         <div className={classes.container}>
@@ -26,9 +34,7 @@ export default function PostDetails(props) {
                 </div>
             </header>
             <div className={classes.content}>
-                <Layout.Container>
-                        {content}
-                </Layout.Container>
+                <Layout.Container dangerouslySetInnerHTML={{__html: translate()}} />
             </div>
         </div>
     )

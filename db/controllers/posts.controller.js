@@ -1,6 +1,6 @@
 import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc } from 'firebase/firestore';
-import {translitRuEn} from "../../tools/tools";
+import {translateRuEn} from "../../tools/tools";
 
 class PostsController {
     dbInstance = null;
@@ -41,7 +41,7 @@ class PostsController {
         // todo: можно писать путь author/title с указанием полной даты.
         //  Тогда разные авторы смогут постить одинаковые называния.
 
-        const url = `${translitRuEn(title)}_${date}`
+        const url = `${translateRuEn(title)}_${date}`
         return addDoc(this.dbInstance, {title, content, description, date, url})
     }
     deleteById = async (id) => {

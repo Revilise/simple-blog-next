@@ -4,10 +4,16 @@ import {createRef} from "react";
 export default function Textarea({value, changeHandle, type, placeholder}) {
     const ref = createRef();
 
+    function resize() {
+        ref.current.style.height = "auto";
+        ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+
     function onChange(e) {
-        ref.current.style.height = 'auto'
-        ref.current.style.height = ref.current.scrollHeight + 'px'
+        e.preventDefault();
+
         changeHandle(e.target.value);
+        resize();
     }
 
     if (type) {
