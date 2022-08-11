@@ -9,6 +9,7 @@ import Main from "../components/Main/Main";
 import Textarea from "../components/Textarea/Textarea";
 import {P, SpanLink} from "../components/SpecialTegs/SpecialTags";
 import Link from "../components/Link/Link";
+import EditorButtons from "../components/EditorButtons/EditorButtons";
 
 export default function CreatePost() {
     const [title, changeTitle] = useState("");
@@ -49,6 +50,7 @@ export default function CreatePost() {
             <Main>
                 <Main.Section>
                     <Layout.Container>
+                        <EditorButtons />
                         <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
                         <Textarea placeholder={'Description'} value={description} changeHandle={changeDescription}/>
                         <Textarea placeholder={'Begin imagine!'} value={content} changeHandle={changeContent}/>
