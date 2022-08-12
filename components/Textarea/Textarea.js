@@ -16,11 +16,15 @@ export default function Textarea({value, changeHandle, type, placeholder}) {
         resize();
     }
 
-    if (type) {
-        return <textarea placeholder={placeholder} ref={ref} rows={1} onChange={onChange} value={value} className={`${classes.textarea} ${classes[type]}`} />
-    }
-
     return (
-        <textarea placeholder={placeholder} ref={ref} rows={1} onChange={onChange} value={value} className={`${classes.textarea}`} />
+        <div className={classes.container}>
+            <textarea
+                onSelect={(e) => {}}
+                placeholder={placeholder}
+                ref={ref} rows={1}
+                onChange={onChange}
+                value={value}
+                className={`${classes.textarea} ${classes[type] ?? ""}`} />
+        </div>
     )
 }

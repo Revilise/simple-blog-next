@@ -9,30 +9,32 @@ import Main from "../components/Main/Main";
 import Textarea from "../components/Textarea/Textarea";
 import {P, SpanLink} from "../components/SpecialTegs/SpecialTags";
 import Link from "../components/Link/Link";
-import EditorButtons from "../components/EditorButtons/EditorButtons";
+import {Editor, EditorState, RichUtils, convertToRaw} from "draft-js";
+import 'draft-js/dist/Draft.css';
 
 export default function CreatePost() {
-    const [title, changeTitle] = useState("");
-    const [description, changeDescription] = useState("");
-    const [content, changeContent] = useState("");
-    const [isLoading, changeIsLoading] = useState(false);
-
     const router = useRouter();
+
+    const [title, changeTitle] = useState("");
+    const [isLoading, changeIsLoading] = useState(false);
+    const [editorState, setEditorState] = useState(
+        () => EditorState.createEmpty()
+    );
 
     const publishPost = (e) => {
         e.preventDefault();
-
         changeIsLoading(true);
+
+        const content = convertToRaw(editorState.getCurrentContent());
+
         postsController.post({
-            title, content, description
+            title, content
         }).then(() => {
             router.push('/')
         })
     }
 
-    useEffect(() => {
-        // ignore
-    }, [isLoading])
+    useEffect(() => {}, [isLoading])
 
     if (isLoading) {
         return (
@@ -40,6 +42,10 @@ export default function CreatePost() {
                 <Loading/>
             </Layout>
         )
+    }
+
+    function onBoldClick() {
+        setEditorState(RichUtils.toggleInlineStyle(editorState, 'BOLD'))
     }
 
     return (
@@ -50,10 +56,11 @@ export default function CreatePost() {
             <Main>
                 <Main.Section>
                     <Layout.Container>
-                        <EditorButtons />
-                        <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
-                        <Textarea placeholder={'Description'} value={description} changeHandle={changeDescription}/>
-                        <Textarea placeholder={'Begin imagine!'} value={content} changeHandle={changeContent}/>
+                        <Textarea placholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
+                        <div>
+                            <button onClick={onBoldClick}>Bold</button>
+                        </div>
+                        <Editor editorState={editorState} onChange={setEditorState} />
                     </Layout.Container>
                 </Main.Section>
                 <Main.Aside>
