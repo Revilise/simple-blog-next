@@ -12,10 +12,8 @@ function Layout({children, title}) {
     )
 }
 
-Layout.Container = ({children}) => (
-    <div className={classes.container}>
-        {children}
-    </div>
+Layout.Container = (props) => (
+    <div className={classes.container} {...props} />
 )
 
 export default Layout;

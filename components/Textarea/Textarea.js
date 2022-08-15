@@ -4,17 +4,27 @@ import {createRef} from "react";
 export default function Textarea({value, changeHandle, type, placeholder}) {
     const ref = createRef();
 
-    function onChange(e) {
-        ref.current.style.height = 'auto'
-        ref.current.style.height = ref.current.scrollHeight + 'px'
-        changeHandle(e.target.value);
+    function resize() {
+        ref.current.style.height = "auto";
+        ref.current.style.height = ref.current.scrollHeight + "px";
     }
 
-    if (type) {
-        return <textarea placeholder={placeholder} ref={ref} rows={1} onChange={onChange} value={value} className={`${classes.textarea} ${classes[type]}`} />
+    function onChange(e) {
+        e.preventDefault();
+
+        changeHandle(e.target.value);
+        resize();
     }
 
     return (
-        <textarea placeholder={placeholder} ref={ref} rows={1} onChange={onChange} value={value} className={`${classes.textarea}`} />
+        <div className={classes.container}>
+            <textarea
+                onSelect={(e) => {}}
+                placeholder={placeholder}
+                ref={ref} rows={1}
+                onChange={onChange}
+                value={value}
+                className={`${classes.textarea} ${classes[type] ?? ""}`} />
+        </div>
     )
 }
