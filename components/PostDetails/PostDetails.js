@@ -20,9 +20,6 @@ export default function PostDetails(props) {
             <header className={classes.header}>
                 <span className={classes.date}>{d.toDateString()}</span>
                 <h1 className={classes.title}>{title}</h1>
-                <div className={classes.description}>
-                    {description}
-                </div>
                 <div className={classes.btns_panel}>
                     <Button><SvgIcons.Bookmark /></Button>
                     <Button><SvgIcons.Share /></Button>

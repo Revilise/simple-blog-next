@@ -1,7 +1,7 @@
 import classes from './post.module.scss'
 import {useRouter} from "next/router";
 
-export default function Post({title, description, date, url}) {
+export default function Post({title, content, date, url}) {
     const router = useRouter();
     const d = new Date(date);
     return (
@@ -16,7 +16,7 @@ export default function Post({title, description, date, url}) {
                 <span className={classes.date}>{d.toDateString()}</span>
             </header>
             <p className={classes.description}>
-                {description}
+                {content}
             </p>
         </div>
     )

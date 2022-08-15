@@ -33,8 +33,9 @@ class PostsController {
         return getDocs(q)
             .then(res => res.docs.map((item) => {
                 const data = item.data();
-                // todo: распарсить контент и преобразовать его в строку.
-                return {...data}
+                const contentObj = JSON.parse(data.content)
+                const content = contentObj.blocks[0].text.substring(0, 255) + "..."
+                return {...data, content}
         }))
     }
     post = ({title, content}) => {
