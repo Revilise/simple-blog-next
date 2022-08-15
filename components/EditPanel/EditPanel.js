@@ -25,6 +25,9 @@ export function EditPanel({editorState, setEditorState}) {
             <Button onStyleClick={() => onStyleClick('UNDERLINE')}>
                 <u>u</u>
             </Button>
+            <Button onStyleClick={() => onStyleClick('STRIKETHROUGH')}>
+                <strike>s</strike>
+            </Button>
         </div>
     )
 }
