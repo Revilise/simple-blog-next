@@ -5,28 +5,25 @@ function LinkHOC (props) {
     const router = useRouter();
     const Component = props.component;
 
-    function redirect (e) {
+    function onClick(e) {
         e.preventDefault();
         router.push(props.href);
     }
 
-    return <Component {...props} redirect={redirect} />
+    return <Component {...props} onClick={onClick} />
 }
 
 const StringLink = (props) => {
     const data = {...props};
-    data.onClick = props.redirect;
-
-    delete data.redirect;
     delete data.component;
 
     return <a href={"#"} {...data} />
 }
 
-const ButtonLink = (props) => <Button {...props} onClick={props.redirect} />
+const ButtonLink = (props) => <Button {...props} />
 
 ////// export
 const Link = (props) => <LinkHOC {...props} component={StringLink} />;
-Link.Button = (props) => <LinkHOC {...props} component={ButtonLink} /> ;
+Link.Button = (props) => <LinkHOC {...props} component={props.component ?? ButtonLink} />;
 
 export default Link;

@@ -1,5 +1,4 @@
-export function translitRuEn(str)
-{
+export function translateRuEn(str) {
     function changeLetter(lit) {
         const arrayLets = [
             ["а", "a"], ["б", "b"], ["в", "v"], ["г", "g"], ["д", "d"], ["е", "e"],
@@ -37,4 +36,8 @@ export function translitRuEn(str)
         else return "-"
     }
     return Array.from(str).map(i => changeLetter(i)).join("")
+}
+
+export function convertTransfersToParagraph(str) {
+    return "<p>" + str.replace(/\n/g, "</p><p>") + "</p>";
 }

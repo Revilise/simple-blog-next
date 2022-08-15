@@ -1,6 +1,6 @@
 import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc } from 'firebase/firestore';
-import {translitRuEn} from "../../tools/tools";
+import {translateRuEn} from "../../tools/tools";
 
 class PostsController {
     dbInstance = null;
@@ -15,7 +15,8 @@ class PostsController {
                     if (doc) {
                         const data = doc.data();
                         const date = new Date(data.date);
-                        return {...data, date, id: doc.id};
+                        const content = JSON.parse(data.content);
+                        return {...data, date, content, id: doc.id};
                     }
                     return {empty: true}
                 }
@@ -32,17 +33,18 @@ class PostsController {
         return getDocs(q)
             .then(res => res.docs.map((item) => {
                 const data = item.data();
+                // todo: распарсить контент и преобразовать его в строку.
                 return {...data}
         }))
     }
-    post = ({title, content, description}) => {
+    post = ({title, content}) => {
         const date = Number(new Date());
 
         // todo: можно писать путь author/title с указанием полной даты.
         //  Тогда разные авторы смогут постить одинаковые называния.
 
-        const url = `${translitRuEn(title)}_${date}`
-        return addDoc(this.dbInstance, {title, content, description, date, url})
+        const url = `${translateRuEn(title)}_${date}`
+        return addDoc(this.dbInstance, {title, content: JSON.stringify(content), date, url})
     }
     deleteById = async (id) => {
         const ref = doc(database, "posts", id)

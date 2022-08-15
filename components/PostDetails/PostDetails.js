@@ -2,13 +2,18 @@ import classes from "./postDetails.module.scss";
 import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
 import SvgIcons from "../SvgIcons/SvgIcons";
+import Draft, {Editor, EditorState} from "draft-js";
 
 export default function PostDetails(props) {
-    const {title, description, content, date, deletePost, empty} = props;
+    const {title, description, date, deletePost, empty} = props;
 
     if (empty) {
         return <div>not found 404</div>
     }
+    const content = props.content ?
+        EditorState.createWithContent(Draft.convertFromRaw(props.content)) :
+        EditorState.createEmpty();
+
     const d = new Date(date);
     return (
         <div className={classes.container}>
@@ -27,7 +32,7 @@ export default function PostDetails(props) {
             </header>
             <div className={classes.content}>
                 <Layout.Container>
-                        {content}
+                    <Editor editorState={content} readOnly={true} />
                 </Layout.Container>
             </div>
         </div>

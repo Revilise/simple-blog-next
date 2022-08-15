@@ -9,29 +9,33 @@ import Main from "../components/Main/Main";
 import Textarea from "../components/Textarea/Textarea";
 import {P, SpanLink} from "../components/SpecialTegs/SpecialTags";
 import Link from "../components/Link/Link";
+import Draft, {EditorState, convertToRaw} from "draft-js";
+import 'draft-js/dist/Draft.css';
+import Editor from "../components/Editor/Editor";
 
 export default function CreatePost() {
-    const [title, changeTitle] = useState("");
-    const [description, changeDescription] = useState("");
-    const [content, changeContent] = useState("");
-    const [isLoading, changeIsLoading] = useState(false);
-
     const router = useRouter();
+
+    const [title, changeTitle] = useState("");
+    const [isLoading, changeIsLoading] = useState(false);
+    const [editorState, setEditorState] = useState(
+        EditorState.createWithContent(emptyContentState)
+    );
 
     const publishPost = (e) => {
         e.preventDefault();
-
         changeIsLoading(true);
+
+        const content = convertToRaw(editorState.getCurrentContent());
+
         postsController.post({
-            title, content, description
+            title, content
         }).then(() => {
             router.push('/')
         })
     }
 
-    useEffect(() => {
-        // ignore
-    }, [isLoading])
+    useEffect(() => {}, [isLoading])
 
     if (isLoading) {
         return (
@@ -50,8 +54,9 @@ export default function CreatePost() {
                 <Main.Section>
                     <Layout.Container>
                         <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
-                        <Textarea placeholder={'Description'} value={description} changeHandle={changeDescription}/>
-                        <Textarea placeholder={'Begin imagine!'} value={content} changeHandle={changeContent}/>
+                    </Layout.Container>
+                    <Layout.Container>
+                        <Editor setEditorState={setEditorState} editorState={editorState}/>
                     </Layout.Container>
                 </Main.Section>
                 <Main.Aside>
@@ -71,3 +76,15 @@ export default function CreatePost() {
         </Layout>
     )
 }
+
+const emptyContentState = Draft.convertFromRaw({
+    entityMap: {},
+    blocks: [
+        {
+            text: '',
+            key: 'foo',
+            type: 'unstyled',
+            entityRanges: [],
+        },
+    ],
+});
