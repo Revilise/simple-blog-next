@@ -1,21 +1,18 @@
-import DOMPurify from 'dompurify';
-
 import classes from "./postDetails.module.scss";
 import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
 import SvgIcons from "../SvgIcons/SvgIcons";
-import {convertTransfersToParagraph} from "../../tools/tools";
+import Draft, {Editor, EditorState} from "draft-js";
 
 export default function PostDetails(props) {
-    const {title, description, content, date, deletePost, empty} = props;
+    const {title, description, date, deletePost, empty} = props;
 
     if (empty) {
         return <div>not found 404</div>
     }
-
-    function translate() {
-        return convertTransfersToParagraph(DOMPurify.sanitize(content));
-    }
+    const content = props.content ?
+        EditorState.createWithContent(Draft.convertFromRaw(props.content)) :
+        EditorState.createEmpty();
 
     const d = new Date(date);
     return (
@@ -34,7 +31,9 @@ export default function PostDetails(props) {
                 </div>
             </header>
             <div className={classes.content}>
-                <Layout.Container dangerouslySetInnerHTML={{__html: translate()}} />
+                <Layout.Container>
+                    <Editor editorState={content} readOnly={true} />
+                </Layout.Container>
             </div>
         </div>
     )

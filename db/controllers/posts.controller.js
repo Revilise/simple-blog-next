@@ -15,8 +15,8 @@ class PostsController {
                     if (doc) {
                         const data = doc.data();
                         const date = new Date(data.date);
-                        // todo: распарсить контент и прокинуть его как объект
-                        return {...data, date, id: doc.id};
+                        const content = JSON.parse(data.content);
+                        return {...data, date, content, id: doc.id};
                     }
                     return {empty: true}
                 }
