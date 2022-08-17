@@ -3,18 +3,25 @@ import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
 import SvgIcons from "../SvgIcons/SvgIcons";
 import Draft, {Editor, EditorState} from "draft-js";
+import {useCallback} from "react";
 
 export default function PostDetails(props) {
-    const {title, description, date, deletePost, empty} = props;
+    const {title, date, deletePost, empty} = props;
 
     if (empty) {
         return <div>not found 404</div>
     }
+
     const content = props.content ?
         EditorState.createWithContent(Draft.convertFromRaw(props.content)) :
         EditorState.createEmpty();
 
     const d = new Date(date);
+
+    const blockStyleFn = useCallback(
+        () => 'block', [],
+    )
+
     return (
         <div className={classes.container}>
             <header className={classes.header}>
@@ -29,7 +36,7 @@ export default function PostDetails(props) {
             </header>
             <div className={classes.content}>
                 <Layout.Container>
-                    <Editor editorState={content} readOnly={true} />
+                    <Editor editorState={content} blockStyleFn={blockStyleFn} readOnly={true} />
                 </Layout.Container>
             </div>
         </div>

@@ -1,0 +1,3 @@
+.block:not(:nth-last-child(1)) {
+    margin-bottom: 16px;
+}

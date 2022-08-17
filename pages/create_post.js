@@ -1,17 +1,18 @@
-import Layout from "../components/Layout/Layout";
 import {useEffect, useState} from "react";
-import Button from "../components/Button/Button";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
-import Loading from "../components/Loading/Loading";
+
+import Layout from "../components/Layout/Layout";
 import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
+import Button from "../components/Button/Button";
+import Loading from "../components/Loading/Loading";
 import Textarea from "../components/Textarea/Textarea";
-import {P, SpanLink} from "../components/SpecialTegs/SpecialTags";
 import Link from "../components/Link/Link";
 import Draft, {EditorState, convertToRaw} from "draft-js";
-import 'draft-js/dist/Draft.css';
 import Editor from "../components/Editor/Editor";
+import 'draft-js/dist/Draft.css';
+import SideLinks from "../components/SideLinks/SideLinks";
 
 export default function CreatePost() {
     const router = useRouter();
@@ -24,15 +25,17 @@ export default function CreatePost() {
 
     const publishPost = (e) => {
         e.preventDefault();
-        changeIsLoading(true);
 
         const content = convertToRaw(editorState.getCurrentContent());
+        if (content.blocks[0].text.length && title.length) {
+            changeIsLoading(true);
 
-        postsController.post({
-            title, content
-        }).then(() => {
-            router.push('/')
-        })
+            postsController.post({
+                title, content
+            }).then(() => {
+                router.push('/')
+            })
+        }
     }
 
     useEffect(() => {}, [isLoading])
@@ -50,6 +53,7 @@ export default function CreatePost() {
             <Header>
                 <Link.Button href={'/pages'}>back</Link.Button>
             </Header>
+
             <Main>
                 <Main.Section>
                     <Layout.Container>
@@ -60,17 +64,8 @@ export default function CreatePost() {
                     </Layout.Container>
                 </Main.Section>
                 <Main.Aside>
-                    <Layout.Container>
-                        <Button onClick={publishPost}>publish</Button>
-                        <P>save in
-                            <SpanLink href={''}> drafts</SpanLink>
-                        </P>
-                    </Layout.Container>
-                    <P>
-                        <SpanLink href={''}>
-                            Rules of publication
-                        </SpanLink>
-                    </P>
+                    <Button onClick={publishPost}>publish</Button>
+                    <SideLinks />
                 </Main.Aside>
             </Main>
         </Layout>
