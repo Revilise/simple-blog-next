@@ -15,21 +15,27 @@
 *
 * */
 
-import Layout from "../Layout/Layout";
-import SpanLink from '../Link/Link'
-export default function SideLinks() {
+import Link from "../Link/Link";
+import classes from './sideLinks.module.scss';
+
+function Item({href, title, icon}) {
     return (
-        <>
-            <Layout.Container>
-                <div>save in
-                    <SpanLink href={''}> drafts</SpanLink>
-                </div>
-            </Layout.Container>
-            <div>
-                <SpanLink href={''}>
-                    Rules of publication
-                </SpanLink>
+        <Link href={href}>
+            <div className={classes.item}>
+                { icon ? <div className={classes.icon}>{icon}</div> : <></> }
+                <span className={classes.title}>{title}</span>
             </div>
-        </>
+        </Link>
     )
+}
+
+export default function SideLinks({items}) {
+    if (Array.isArray(items)) {
+        return (
+            <div className={classes.container}>
+                {items.map(el => <Item {...el} /> )}
+            </div>
+        )
+    }
+    return null;
 }

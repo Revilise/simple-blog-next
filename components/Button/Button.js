@@ -10,5 +10,6 @@ function Button(props) {
 }
 
 Button.Bordered = (props) => <Button {...props} className={classes.bordered} />
+Button.Utils = (props) => <Button {...props} className={classes.util} />
 
 export default Button;

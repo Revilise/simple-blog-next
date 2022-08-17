@@ -9,10 +9,12 @@ import Button from "../components/Button/Button";
 import Loading from "../components/Loading/Loading";
 import Textarea from "../components/Textarea/Textarea";
 import Link from "../components/Link/Link";
-import Draft, {EditorState, convertToRaw} from "draft-js";
-import Editor from "../components/Editor/Editor";
+import {Editor, EditorState, convertToRaw} from "draft-js";
 import 'draft-js/dist/Draft.css';
 import SideLinks from "../components/SideLinks/SideLinks";
+import {createPostSideLinks} from "../resorses/resourses";
+import {emptyContentState} from "../resorses/draftResourses";
+import {EditPanel} from "../components/EditPanel/EditPanel";
 
 export default function CreatePost() {
     const router = useRouter();
@@ -48,38 +50,43 @@ export default function CreatePost() {
         )
     }
 
+    const styleMap = {
+        'STRIKETHROUGH': {
+            textDecoration: 'line-through',
+        },
+    };
+
+
     return (
-        <Layout title={"create post"}>
+        <Layout title={"create"}>
             <Header>
                 <Link.Button href={'/pages'}>back</Link.Button>
             </Header>
-
             <Main>
                 <Main.Section>
                     <Layout.Container>
                         <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
                     </Layout.Container>
                     <Layout.Container>
-                        <Editor setEditorState={setEditorState} editorState={editorState}/>
+                        <EditPanel
+                            setEditorState={setEditorState}
+                            editorState={editorState}
+                        />
+                        <Editor
+                            customStyleMap={styleMap}
+                            placeholder={'Begin your article here...'}
+                            editorState={editorState}
+                            onChange={setEditorState}/>
                     </Layout.Container>
                 </Main.Section>
                 <Main.Aside>
-                    <Button onClick={publishPost}>publish</Button>
-                    <SideLinks />
+                    <Layout.Container>
+                        <Button onClick={publishPost}>publish</Button>
+                        <SideLinks items={createPostSideLinks} />
+                    </Layout.Container>
                 </Main.Aside>
             </Main>
         </Layout>
     )
 }
 
-const emptyContentState = Draft.convertFromRaw({
-    entityMap: {},
-    blocks: [
-        {
-            text: '',
-            key: 'foo',
-            type: 'unstyled',
-            entityRanges: [],
-        },
-    ],
-});

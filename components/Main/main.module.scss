@@ -9,7 +9,7 @@
 
 .container {
   display: grid;
-  gap: 24px;
+  column-gap: 24px;
   grid-template-columns: repeat(8, 1fr);
   @include getAreaSettings(aside);
   @include getAreaSettings(section);

@@ -35,7 +35,7 @@ export default function PostDetails(props) {
                 </div>
             </header>
             <div className={classes.content}>
-                <Layout.Container>
+                <Layout.Container style={{borderTopRightRadius: 0, borderTopLeftRadius: 0}}>
                     <Editor editorState={content} blockStyleFn={blockStyleFn} readOnly={true} />
                 </Layout.Container>
             </div>

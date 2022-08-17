@@ -1,13 +1,6 @@
-import classes from './editPanel.module.scss';
 import {RichUtils} from "draft-js";
-
-function Button({children, active, onStyleClick}) {
-    return (
-        <button className={`${classes.button} ${active ? classes.active : ''}`} onClick={onStyleClick}>
-            {children}
-        </button>
-    )
-}
+import Button from "../Button/Button";
+import classes from './editPanel.module.scss';
 
 export function EditPanel({editorState, setEditorState}) {
     function onStyleClick(style) {
@@ -16,18 +9,18 @@ export function EditPanel({editorState, setEditorState}) {
 
     return (
         <div className={classes.edit_panel}>
-            <Button onStyleClick={() => onStyleClick('BOLD')}>
+            <Button.Utils onClick={() => onStyleClick('BOLD')}>
                 <b>B</b>
-            </Button>
-            <Button onStyleClick={() => onStyleClick('ITALIC')}>
+            </Button.Utils>
+            <Button.Utils onClick={() => onStyleClick('ITALIC')}>
                 <i>i</i>
-            </Button>
-            <Button onStyleClick={() => onStyleClick('UNDERLINE')}>
+            </Button.Utils>
+            <Button.Utils onClick={() => onStyleClick('UNDERLINE')}>
                 <u>u</u>
-            </Button>
-            <Button onStyleClick={() => onStyleClick('STRIKETHROUGH')}>
+            </Button.Utils>
+            <Button.Utils onClick={() => onStyleClick('STRIKETHROUGH')}>
                 <strike>s</strike>
-            </Button>
+            </Button.Utils>
         </div>
     )
 }

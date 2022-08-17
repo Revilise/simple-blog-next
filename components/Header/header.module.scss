@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: 4fr 2fr 1fr;
   gap: 24px;
   .header_title {
     font-size: 27px;
@@ -11,4 +11,5 @@
       color: var(--lt-hovered-primary);
     }
   }
+  .plug {width: 100%;}
 }

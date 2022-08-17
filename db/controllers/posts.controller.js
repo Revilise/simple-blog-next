@@ -1,6 +1,6 @@
 import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc } from 'firebase/firestore';
-import {translateRuEn} from "../../tools/tools";
+import {translateRuEn} from "../../js/translateRuEn";
 
 class PostsController {
     dbInstance = null;
@@ -24,8 +24,9 @@ class PostsController {
     }
     getByString = (str) => {
         return this.getAll().then(res => res.filter(data => {
-            const keys = [data.title, data.content, data.description];
-            return keys.some(key => key.includes(str));
+            return [data.title, data.content].some(key =>
+                    key.toLowerCase().includes(str.toLowerCase())
+                );
         }))
     }
     getAll = () => {

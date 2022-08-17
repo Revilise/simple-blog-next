@@ -28,3 +28,21 @@
     background: var(--lt-bordered-btn-background);
   }
 }
+
+.button.util {
+    width: 45px;
+    color: var(--lt-main-font-color);
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border-radius: 8px;
+    background: var(--lt-plates-background);
+    cursor: pointer;
+    transition: .2s background;
+    border: none;
+    &:hover {
+      background: var(--lt-hovered-plates-background);
+    }
+}
