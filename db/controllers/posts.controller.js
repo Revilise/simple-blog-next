@@ -1,5 +1,5 @@
 import { database } from "../firebase";
-import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc, startAfter, limit } from 'firebase/firestore';
 import {translateRuEn} from "../../js/translateRuEn";
 
 class PostsController {
@@ -29,15 +29,13 @@ class PostsController {
                 );
         }))
     }
-    getAll = () => {
-        const q = query(this.dbInstance, orderBy("date", "desc"));
-        return getDocs(q)
-            .then(res => res.docs.map((item) => {
-                const data = item.data();
-                const contentObj = JSON.parse(data.content)
-                const content = contentObj.blocks[0].text.substring(0, 255) + "..."
-                return {...data, content}
-        }))
+    getAll(last) {
+        const _limit = 5;
+        if (last) {
+            const q = query(this.dbInstance, orderBy("date", "desc"), startAfter(last), limit(_limit));
+            return getDocs(q);
+        }
+        return null;
     }
     post = ({title, content}) => {
         const date = Number(new Date());
