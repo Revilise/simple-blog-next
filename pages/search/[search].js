@@ -18,7 +18,6 @@ export default function _Search() {
     useEffect(() => {
         if (search)
         {
-            console.log(lastSnapshot)
             postsController.getByString(router.query.search, lastSnapshot, setLastSnapshot)
                 ?.then(res => setPosts([...posts, ...res]))
                 .finally(() => setIsFetch(false));
@@ -27,10 +26,12 @@ export default function _Search() {
     }, [isFetch])
 
     useEffect(() => {
-        setLastSnapshot({});
-        setPosts([])
-
         if (search) setIsFetch(true);
+
+        return function () {
+            setLastSnapshot({});
+            setPosts([])
+        }
     }, [search])
 
     return (
