@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
 
@@ -56,7 +56,6 @@ export default function CreatePost() {
         },
     };
 
-
     return (
         <Layout title={"create"}>
             <Header>
@@ -73,6 +72,7 @@ export default function CreatePost() {
                             editorState={editorState}
                         />
                         <Editor
+                            blockStyleFn={() => 'block'}
                             customStyleMap={styleMap}
                             placeholder={'Begin your article here...'}
                             editorState={editorState}

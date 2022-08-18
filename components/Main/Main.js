@@ -2,7 +2,7 @@ import classes from './main.module.scss'
 
 function MainHOC({ children, type }) {
     return (
-        <div className={classes[type]}>
+        <div onScroll={() => console.log(window.pageXOffset)} className={classes[type]}>
             { children }
         </div>
     )
