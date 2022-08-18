@@ -8,26 +8,15 @@ import {useEffect, useState} from "react";
 
 export default function Home() {
     const [posts, setPosts] = useState([])
-    const [page, changePage] = useState(0);
     const [isFetch, changeIsFetch] = useState(false);
-    const [lastSnapshot, setSnapshot] = useState({});
+    const [lastSnapshot, setLastSnapshot] = useState({});
 
     useEffect(() => {
         postsController
-            .getAll(lastSnapshot)
+            .getAll({lastSnapshot, setLastSnapshot})
             ?.then(res => {
-                setSnapshot(res.docs[res.docs.length - 1]);
-
-                const fetchedPosts = res.docs.map((item) => {
-                    const data = item.data();
-                    const contentObj = JSON.parse(data.content)
-                    const content = contentObj.blocks[0].text.substring(0, 255) + "..."
-                    return {...data, content}
-                });
-
-                setPosts([...posts, ...fetchedPosts]);
-                changePage(page + 1);
-                })
+                if (res) setPosts([...posts, ...res]);
+            })
             .finally(() => changeIsFetch(false))
     },[isFetch])
 

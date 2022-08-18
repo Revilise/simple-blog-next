@@ -9,11 +9,28 @@ import postsController from "../../db/controllers/posts.controller";
 
 export default function _Search() {
     const [posts, setPosts] = useState([]);
+    const [lastSnapshot, setLastSnapshot] = useState({});
+    const [isFetch, setIsFetch] = useState(false);
+
     const router = useRouter();
     const search = router.query.search;
+
     useEffect(() => {
         if (search)
-            postsController.getByString(router.query.search).then(res => setPosts(res));
+        {
+            console.log(lastSnapshot)
+            postsController.getByString(router.query.search, lastSnapshot, setLastSnapshot)
+                ?.then(res => setPosts([...posts, ...res]))
+                .finally(() => setIsFetch(false));
+        }
+
+    }, [isFetch])
+
+    useEffect(() => {
+        setLastSnapshot({});
+        setPosts([])
+
+        if (search) setIsFetch(true);
     }, [search])
 
     return (
