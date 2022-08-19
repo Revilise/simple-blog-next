@@ -6,9 +6,9 @@ import Draft, {Editor, EditorState} from "draft-js";
 import {useCallback} from "react";
 
 export default function PostDetails(props) {
-    const {title, date, deletePost} = props;
+    const {title, date, deletePost, empty} = props;
 
-    if (!props) {
+    if (empty) {
         return <div>not found 404</div>
     }
 

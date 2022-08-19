@@ -1,6 +1,7 @@
 import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc, startAfter, limit } from 'firebase/firestore';
 import {translateRuEn} from "../../js/translateRuEn";
+import {isFunction} from "../../js/typeCheck";
 
 class PostsController {
     dbInstance = null;
@@ -26,7 +27,7 @@ class PostsController {
                         return this.processData(doc);
                     }
 
-                    return null;
+                    return {empty: true};
                 }
             )
     }
@@ -47,8 +48,10 @@ class PostsController {
             const q = query(this.dbInstance, orderBy("date", "desc"), startAfter(lastSnapshot), limit(_limit));
 
             return getDocs(q).then(res => {
-                // TODO: нормальную проверку на тип Function
-                if (setLastSnapshot) setLastSnapshot(res.docs[res.docs.length - 1]);
+
+                if (isFunction(setLastSnapshot)) {
+                    setLastSnapshot(res.docs[res.docs.length - 1]);
+                }
 
                 return res.docs.map((item) => {
                     const data = this.processData(item);
