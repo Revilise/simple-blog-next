@@ -1,10 +1,11 @@
 import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc, startAfter, limit } from 'firebase/firestore';
-import {translateRuEn} from "../../js/translateRuEn";
-import {isFunction} from "../../js/typeCheck";
+import { translator } from "../../js/translateRuEn";
+import { typecheck } from "../../js/typeCheck";
 
 class PostsController {
     dbInstance = null;
+
     constructor() {
        this.dbInstance = collection(database, 'posts');
 
@@ -49,7 +50,7 @@ class PostsController {
 
             return getDocs(q).then(res => {
 
-                if (isFunction(setLastSnapshot)) {
+                if (typecheck.isFunction(setLastSnapshot)) {
                     setLastSnapshot(res.docs[res.docs.length - 1]);
                 }
 
@@ -69,7 +70,7 @@ class PostsController {
         // todo: можно писать путь author/title с указанием полной даты.
         //  Тогда разные авторы смогут постить одинаковые называния.
 
-        const url = `${translateRuEn(title)}_${date}`
+        const url = `${translator.translateRuEn(title)}_${date}`
         return addDoc(this.dbInstance, {title, content: JSON.stringify(content), date, url})
     }
 
