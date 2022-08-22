@@ -15,6 +15,9 @@
   &:hover {
     background: var(--lt-hovered-primary);
   }
+  * {
+    cursor: pointer;
+  }
 }
 
 .button.bordered {
@@ -39,10 +42,12 @@
     font-size: 24px;
     border-radius: 8px;
     background: var(--lt-plates-background);
-    cursor: pointer;
     transition: .2s background;
     border: none;
     &:hover {
       background: var(--lt-hovered-plates-background);
     }
+}
+.file_input {
+  display: none;
 }

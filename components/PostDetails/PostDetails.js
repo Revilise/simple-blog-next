@@ -2,8 +2,8 @@ import classes from "./postDetails.module.scss";
 import Layout from "../Layout/Layout";
 import Button from "../Button/Button";
 import SvgIcons from "../SvgIcons/SvgIcons";
-import Draft, {Editor, EditorState} from "draft-js";
-import {useCallback} from "react";
+import Draft, {EditorState} from "draft-js";
+import Editor from "../Editor/Editor";
 
 export default function PostDetails(props) {
     const {title, date, deletePost, empty} = props;
@@ -17,10 +17,6 @@ export default function PostDetails(props) {
         EditorState.createEmpty();
 
     const d = new Date(date);
-
-    const blockStyleFn = useCallback(
-        () => 'block', [],
-    )
 
     return (
         <div className={classes.container}>
@@ -36,7 +32,7 @@ export default function PostDetails(props) {
             </header>
             <div className={classes.content}>
                 <Layout.Container style={{borderTopRightRadius: 0, borderTopLeftRadius: 0}}>
-                    <Editor editorState={content} blockStyleFn={blockStyleFn} readOnly={true} />
+                    <Editor editorState={content} readOnly={true} />
                 </Layout.Container>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useState} from "react";
 import {useRouter} from "next/router";
 import postsController from "../db/controllers/posts.controller";
 
@@ -8,18 +8,13 @@ import Main from "../components/Main/Main";
 import Button from "../components/Button/Button";
 import Textarea from "../components/Textarea/Textarea";
 import Link from "../components/Link/Link";
-import {Editor, EditorState, convertToRaw} from "draft-js";
+import {EditorState, convertToRaw} from "draft-js";
 import 'draft-js/dist/Draft.css';
 import SideLinks from "../components/SideLinks/SideLinks";
 import {createPostSideLinks} from "../resorses/resourses";
 import {emptyContentState} from "../resorses/draftResourses";
 import {EditPanel} from "../components/EditPanel/EditPanel";
-
-const styleMap = {
-    'STRIKETHROUGH': {
-        textDecoration: 'line-through',
-    },
-};
+import Editor from "../components/Editor/Editor";
 
 export default function CreatePost() {
     const router = useRouter();
@@ -43,9 +38,6 @@ export default function CreatePost() {
         }
     }
 
-    // todo: different blocks styling
-    const blockStyleFn = useCallback(() => 'block', [])
-
     return (
         <Layout title={"create"}>
             <Header>
@@ -66,8 +58,6 @@ export default function CreatePost() {
                             editorState={editorState}
                         />
                         <Editor
-                            blockStyleFn={blockStyleFn}
-                            customStyleMap={styleMap}
                             placeholder={'Begin your article here...'}
                             editorState={editorState}
                             onChange={setEditorState}/>
