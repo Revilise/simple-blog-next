@@ -6,7 +6,6 @@ import Layout from "../components/Layout/Layout";
 import Header from "../components/Header/Header";
 import Main from "../components/Main/Main";
 import Button from "../components/Button/Button";
-import Loading from "../components/Loading/Loading";
 import Textarea from "../components/Textarea/Textarea";
 import Link from "../components/Link/Link";
 import {Editor, EditorState, convertToRaw} from "draft-js";
@@ -16,11 +15,16 @@ import {createPostSideLinks} from "../resorses/resourses";
 import {emptyContentState} from "../resorses/draftResourses";
 import {EditPanel} from "../components/EditPanel/EditPanel";
 
+const styleMap = {
+    'STRIKETHROUGH': {
+        textDecoration: 'line-through',
+    },
+};
+
 export default function CreatePost() {
     const router = useRouter();
 
     const [title, changeTitle] = useState("");
-    const [isLoading, changeIsLoading] = useState(false);
     const [editorState, setEditorState] = useState(
         EditorState.createWithContent(emptyContentState)
     );
@@ -29,9 +33,8 @@ export default function CreatePost() {
         e.preventDefault();
 
         const content = convertToRaw(editorState.getCurrentContent());
-        if (content.blocks[0].text.length && title.length) {
-            changeIsLoading(true);
 
+        if (content.blocks[0].text.length && title.length) {
             postsController.post({
                 title, content
             }).then(() => {
@@ -40,31 +43,22 @@ export default function CreatePost() {
         }
     }
 
-    useEffect(() => {}, [isLoading])
-
-    if (isLoading) {
-        return (
-            <Layout title={"creating post"}>
-                <Loading/>
-            </Layout>
-        )
-    }
-
-    const styleMap = {
-        'STRIKETHROUGH': {
-            textDecoration: 'line-through',
-        },
-    };
+    // todo: different blocks styling
+    const blockStyleFn = useCallback(() => 'block', [])
 
     return (
         <Layout title={"create"}>
             <Header>
-                <Link.Button href={'/pages'}>back</Link.Button>
+                <Link.Button href={'/'} handler={() => alert("post unsaved")}>back</Link.Button>
             </Header>
             <Main>
                 <Main.Section>
                     <Layout.Container>
-                        <Textarea placeholder={'Title'} type={"title"} value={title} changeHandle={changeTitle}/>
+                        <Textarea
+                            placeholder={'Title'}
+                            type={"title"}
+                            value={title}
+                            changeHandle={changeTitle}/>
                     </Layout.Container>
                     <Layout.Container>
                         <EditPanel
@@ -72,7 +66,7 @@ export default function CreatePost() {
                             editorState={editorState}
                         />
                         <Editor
-                            blockStyleFn={() => 'block'}
+                            blockStyleFn={blockStyleFn}
                             customStyleMap={styleMap}
                             placeholder={'Begin your article here...'}
                             editorState={editorState}
