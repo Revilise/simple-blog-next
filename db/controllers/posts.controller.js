@@ -44,7 +44,7 @@ class PostsController {
     }
 
     getAll({lastSnapshot, size, setLastSnapshot}) {
-        const _limit = size ?? 5;
+        const _limit = size ?? 10;
         if (lastSnapshot) {
             const q = query(this.dbInstance, orderBy("date", "desc"), startAfter(lastSnapshot), limit(_limit));
 
