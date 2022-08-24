@@ -1,9 +1,9 @@
 import classes from "./post.module.scss";
-import Layout from "../components/Layout/Layout";
-import Button from "../components/Button/Button";
-import SvgIcons from "../components/SvgIcons/SvgIcons";
+import Layout from "../../components/Layout/Layout";
+import Button from "../../components/Button/Button";
+import SvgIcons from "../../components/SvgIcons/SvgIcons";
 import Draft, {EditorState} from "draft-js";
-import Editor from "../components/Editor/Editor";
+import Editor from "../../components/Editor/Editor";
 
 export default function Post(props) {
     const {title, date, deletePost, empty} = props;

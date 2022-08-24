@@ -5,19 +5,20 @@ import {useRouter} from "next/router";
 import postsController from "../../db/controllers/posts.controller";
 
 import Layout from "../../components/Layout/Layout";
-import Post from "../../features/Post";
+import Post from "../../features/post/Post";
 import Loading from "../../components/Loading/Loading";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Link from "../../components/Link/Link";
-import {setPost} from "../../features/postSlice";
+import {setPost} from "../../features/post/postSlice";
+import {getPostByUrl} from "../../features/post/PostAPI";
 
 export default function PostDetails() {
     const router = useRouter();
-    const url = router.query.url;
-    const [isFetch, changeIsFetch] = useState(false);
-    const data = useSelector(state => state.post.data);
     const dispatch = useDispatch();
+    const url = router.query.url;
+    const [isFetch, changeIsFetch] = useState(true);
+    const data = useSelector(state => state.post.data);
     const setPostDispatched = (val) => dispatch(setPost(val));
 
     function deletePost() {
@@ -25,15 +26,19 @@ export default function PostDetails() {
     }
 
     useEffect(() => {
-        changeIsFetch(true);
-        if (url) {
-            postsController.getOne(router.query.url)
+        if (url && url === data.url) {
+            changeIsFetch(false);
+            return;
+        }
+
+        if (url && url !== data.url) {
+            getPostByUrl(url)
                 .then((res) => setPostDispatched(res))
                 .then(() => changeIsFetch(false))
         }
+
     }, [url])
 
-    // console.log(data)
     return (
         <Layout title={"Sog"}>
             <Header search>

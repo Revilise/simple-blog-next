@@ -19,20 +19,6 @@ class PostsController {
         }
     }
 
-    getOne = (url) => {
-        const q = query(this.dbInstance, where("url", "==", url))
-        return getDocs(q)
-            .then(res => {
-                    const doc = res.docs[0];
-                    if (doc) {
-                        return this.processData(doc);
-                    }
-
-                    return {empty: true};
-                }
-            )
-    }
-
     getByString = (str, lastSnapshot, setLastSnapshot) => {
         return this.getAll({lastSnapshot, size: 100, setLastSnapshot})
             ?.then(res => res.filter(data => {

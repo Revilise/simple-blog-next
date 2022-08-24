@@ -1,6 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
 
-import postReducer from '../features/postSlice'
+import postReducer from '../features/post/postSlice'
 
 export function makeStore() {
     return configureStore({
