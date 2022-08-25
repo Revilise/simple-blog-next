@@ -1,4 +1,4 @@
-export const translator = (function() {
+export const processors = (function() {
     const arrayLets = [
         ["а", "a"], ["б", "b"], ["в", "v"], ["г", "g"], ["д", "d"], ["е", "e"],
         ["ё", "yo"], ["ж", "zh"], ["з", "z"], ["и", "i"], ["й", "j"], ["к", "k"],
@@ -33,8 +33,18 @@ export const translator = (function() {
 
         return Array.from(str).map(i => changeLetter(i)).join("");
     }
+    function parsePostData(doc) {
+        const data = doc.data();
+        const date = (new Date(data.date)).toDateString();
+        const content = JSON.parse(data.content);
+        const id = doc.id;
 
+        return {...data, date, content, id};
+    }
+    function deepCopy(data) {
+        return JSON.parse(JSON.stringify(data));
+    }
     return {
-        translateRuEn
+        translateRuEn, parsePostData, deepCopy
     }
 })();

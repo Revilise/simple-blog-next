@@ -1,7 +1,7 @@
 import classes from './Textarea.module.scss';
 import {createRef} from "react";
 
-export default function Textarea({value, changeHandle, type, placeholder}) {
+export default function Textarea({value, changeHandle, type, placeholder, required}) {
     const ref = createRef();
 
     function resize() {
@@ -11,7 +11,6 @@ export default function Textarea({value, changeHandle, type, placeholder}) {
 
     function onChange(e) {
         e.preventDefault();
-
         changeHandle(e.target.value);
         resize();
     }
@@ -24,6 +23,7 @@ export default function Textarea({value, changeHandle, type, placeholder}) {
                 ref={ref} rows={1}
                 onChange={onChange}
                 value={value}
+                required={required}
                 className={`${classes.textarea} ${classes[type] ?? ""}`} />
         </div>
     )

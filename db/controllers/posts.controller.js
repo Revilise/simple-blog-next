@@ -1,22 +1,13 @@
 import { database } from "../firebase";
 import { collection, addDoc, getDocs, query, orderBy, where, deleteDoc, doc, startAfter, limit } from 'firebase/firestore';
-import { translator } from "../../js/translateRuEn";
 import { typecheck } from "../../js/typeCheck";
+import {processors} from "../../js/processors";
 
 class PostsController {
     dbInstance = null;
 
     constructor() {
        this.dbInstance = collection(database, 'posts');
-
-       this.processData = (doc) => {
-            const data = doc.data();
-            const date = new Date(data.date);
-            const content = JSON.parse(data.content);
-            const id = doc.id;
-
-            return {...data, date, content, id};
-        }
     }
 
     getByString = (str, lastSnapshot, setLastSnapshot) => {
@@ -41,23 +32,13 @@ class PostsController {
                 }
 
                 return res.docs.map((item) => {
-                    const data = this.processData(item);
+                    const data = processors.parsePostData(item);
                     const content = data.content.blocks[0].text.substring(0, 255) + "...";
                     return {...data, content }
                 });
             })
         }
         return null;
-    }
-
-    post = ({title, content}) => {
-        const date = Number(new Date());
-
-        // todo: можно писать путь author/title с указанием полной даты.
-        //  Тогда разные авторы смогут постить одинаковые называния.
-
-        const url = `${translator.translateRuEn(title)}_${date}`
-        return addDoc(this.dbInstance, {title, content: JSON.stringify(content), date, url})
     }
 
     deleteById = async (id) => {

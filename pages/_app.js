@@ -1,4 +1,4 @@
-import '../styles/global.css';
+import '../styles/global.scss';
 import '../styles/EditorStyling.css';
 import {Provider} from "react-redux";
 import store from "../app/store";

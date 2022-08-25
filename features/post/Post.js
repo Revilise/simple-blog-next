@@ -16,12 +16,10 @@ export default function Post(props) {
         EditorState.createWithContent(Draft.convertFromRaw(props.content)) :
         EditorState.createEmpty();
 
-    const d = new Date(date);
-
     return (
         <div className={classes.container}>
             <header className={classes.header}>
-                <span className={classes.date}>{d.toDateString()}</span>
+                <span className={classes.date}>{date}</span>
                 <h1 className={classes.title}>{title}</h1>
                 <div className={classes.btns_panel}>
                     <Button><SvgIcons.Bookmark /></Button>

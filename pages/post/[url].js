@@ -10,7 +10,7 @@ import Loading from "../../components/Loading/Loading";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Link from "../../components/Link/Link";
-import {setPost} from "../../features/post/postSlice";
+import {selectPost, setPost} from "../../features/post/postSlice";
 import {getPostByUrl} from "../../features/post/PostAPI";
 
 export default function PostDetails() {
@@ -18,7 +18,7 @@ export default function PostDetails() {
     const dispatch = useDispatch();
     const url = router.query.url;
     const [isFetch, changeIsFetch] = useState(true);
-    const data = useSelector(state => state.post.data);
+    const data = useSelector(selectPost);
     const setPostDispatched = (val) => dispatch(setPost(val));
 
     function deletePost() {

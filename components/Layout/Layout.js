@@ -12,8 +12,8 @@ function Layout({children, title}) {
     )
 }
 
-Layout.Container = (props) => (
-    <div className={classes.container} {...props} />
-)
+Layout.Container = (props) => {
+    return <div {...props} className={`${classes.container} ${props.className}`} />
+}
 
 export default Layout;

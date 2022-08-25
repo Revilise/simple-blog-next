@@ -1,0 +1,75 @@
+@font-face {
+    font-family: Rubik;
+    src: url('../public/fonts/Rubik/Rubik-Regular.ttf');
+    font-weight: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Rubik, SansSerif, serif;
+}
+body {
+    background: #FFFFFF;
+    font-size: 18px;
+    line-height: 27px;
+    color: #2D3142;
+}
+a {
+    text-decoration: none;
+    color: var(--lt-main-font-color);
+}
+a:hover {
+    color: var(--lt-span-font-color);
+}
+:root {
+    --lt-background: #ffffff;
+    --lt-transperent-primary: 255,255,255;
+    --lt-bordered-btn: #ffffff;
+    --lt-bordered-btn-background: rgba(255,255,255, 0.3);
+    --lt-primary: #87B2E6;
+    --lt-hovered-primary: #8397DF;
+    --lt-sub: #91EAE4;
+    --lt-plates-background: #F7F7F9;
+    --lt-hovered-plates-background: #dedede;
+    --lt-plates-border: #F2F2F2;
+    --lt-main-font-color: #000000;
+    --lt-span-font-color: #86A8E7;
+    --lt-span-font-lighter: #ADC9ED;
+    --lt-sub-span-font-color: #ffffff;
+    --lt-linear-gradient: linear-gradient(93.94deg, #7F7FD5 -2.11%, #86A8E7 52.11%, #91EAE4 97.47%);
+}
+
+@mixin getAreaSettings ($area) {
+    #{'.grid-container__' + $area} {
+        grid-area: $area;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+.grid-container {
+    display: grid;
+    column-gap: 24px;
+    grid-template-columns: repeat(8, 1fr);
+    @include getAreaSettings(aside);
+    @include getAreaSettings(section);
+
+    .grid-container__aside {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        & + .grid-container__section {
+            grid-column-start: 3;
+            grid-column-end: 9;
+        }
+    }
+    .grid-container__section {
+        grid-column-start: 1;
+        grid-column-end: 7;
+        + .grid-container__aside {
+            grid-column-start: 7;
+            grid-column-end: 9;
+        }
+    }
+}
