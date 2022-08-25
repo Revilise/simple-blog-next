@@ -7,6 +7,7 @@ const imagePlugin = createImagePlugin();
 const plugins = [imagePlugin]
 
 export default React.memo(function(props) {
+
         const styleMap = {
             'STRIKETHROUGH': {
                 textDecoration: 'line-through',
@@ -19,7 +20,6 @@ export default React.memo(function(props) {
         return (
             <Editor
                 {...props}
-                onChange={props.onChange ?? function() {}}
                 plugins={plugins}
                 blockStyleFn={blockStyleFn}
                 customStyleMap={styleMap}

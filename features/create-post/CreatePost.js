@@ -1,9 +1,10 @@
 import {useState} from "react";
 import {useRouter} from "next/router";
+import {useDispatch, useSelector} from "react-redux";
 import {convertToRaw, EditorState} from "draft-js";
-import {emptyContentState} from "../../resorses/draftResourses";
 
 import classes from './create-post.module.scss'
+
 import Layout from "../../components/Layout/Layout";
 import Textarea from "../../components/Textarea/Textarea";
 import {EditPanel} from "../../components/EditPanel/EditPanel";
@@ -12,21 +13,24 @@ import SideLinks from "../../components/SideLinks/SideLinks";
 import Button from "../../components/Button/Button";
 import {createPostSideLinks} from "../../resorses/resourses";
 import {createNewRecord} from "./createPostAPI";
+import {selectTitle, setTitle, setContent, clearAll, selectContent} from "./createPostSlice";
+import {emptyContentState} from "../../resorses/draftResourses";
 
 export default function CreatePost() {
     const router = useRouter();
-
-    const [title, changeTitle] = useState("");
-    const [content, setContent] = useState(
-        EditorState.createWithContent(emptyContentState)
-    );
+    const dispatch = useDispatch();
+    const [title, setTitle] = useState("")
+    const [content, setContentDispatched] = useState(EditorState.createWithContent(emptyContentState))
 
     function publishPost(e) {
         e.preventDefault();
-        const content = convertToRaw(content.getCurrentContent());
+        const _content = convertToRaw(content.getCurrentContent());
 
-        if (content.blocks[0].text.length && title.length) {
-            createNewRecord({title, content}).then(() => router.push('/'))
+        if (_content.blocks[0].text.length && title.length) {
+            createNewRecord({title, content: _content})
+                .then(() => {
+                    router.push('/');
+                })
         }
     }
 
@@ -34,20 +38,21 @@ export default function CreatePost() {
         <div>
             <form className={`${classes.form} grid-container`}>
                 <Layout.Container className={'grid-container__section'}>
-                    <Textarea
-                        placeholder={'Title'}
-                        type={"title"}
-                        value={title}
-                        required
-                        changeHandle={changeTitle}/>
+                    {/*<Textarea*/}
+                    {/*    placeholder={'Title'}*/}
+                    {/*    type={"title"}*/}
+                    {/*    value={title}*/}
+                    {/*    required*/}
+                    {/*    changeHandle={setTitleDispatched}*/}
+                    {/*/>*/}
                     <EditPanel
-                        setEditorState={setContent}
+                        setEditorState={setContentDispatched}
                         editorState={content}
                     />
                     <Editor
                         placeholder={'Begin your article here...'}
                         editorState={content}
-                        onChange={setContent}
+                        onChange={setContentDispatched}
                     />
                 </Layout.Container>
                 <div className={'grid-container__aside'}>

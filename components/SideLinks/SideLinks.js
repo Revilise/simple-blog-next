@@ -33,7 +33,7 @@ export default function SideLinks({items}) {
     if (Array.isArray(items)) {
         return (
             <div className={classes.container}>
-                {items.map(el => <Item {...el} /> )}
+                {items.map((el, i) => <Item key={i} {...el} /> )}
             </div>
         )
     }

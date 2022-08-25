@@ -1,11 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {EditorState} from "draft-js";
-import {emptyContentState} from "../../resorses/draftResourses";
 import {processors} from "../../js/processors";
 
 const initialState = {
     title: '',
-    content: EditorState.createWithContent(emptyContentState),
 }
 
 export const createPostSlice = createSlice({
@@ -26,7 +23,7 @@ export const createPostSlice = createSlice({
 
 export const { setTitle, setContent, clearAll } = createPostSlice.actions;
 
-export const selectTitle = (state) => state.title;
-export const selectContent = (state) => state.content;
+export const selectTitle = (state) => state.create_post.title;
+export const selectContent = (state) => state.create_post.content;
 
 export default createPostSlice.reducer;
