@@ -6,24 +6,27 @@ import {useCallback} from "react";
 const imagePlugin = createImagePlugin();
 const plugins = [imagePlugin]
 
-export default React.memo(function(props) {
+function _Editor(props, ref) {
 
-        const styleMap = {
-            'STRIKETHROUGH': {
-                textDecoration: 'line-through',
-            },
-        };
+    const styleMap = {
+        'STRIKETHROUGH': {
+            textDecoration: 'line-through',
+        },
+    };
 
-        // todo: different blocks styling
-        const blockStyleFn = useCallback(() => 'block', [])
+    // todo: different blocks styling
+    const blockStyleFn = useCallback(() => 'block', [])
 
-        return (
-            <Editor
-                {...props}
-                plugins={plugins}
-                blockStyleFn={blockStyleFn}
-                customStyleMap={styleMap}
-            />
-        )
-    }
-)
+    return (
+        <Editor
+            {...props}
+            ref={ref}
+            plugins={plugins}
+            blockStyleFn={blockStyleFn}
+            customStyleMap={styleMap}
+        />
+    )
+}
+
+
+export default React.forwardRef(_Editor);

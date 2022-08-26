@@ -12,9 +12,9 @@ export default function Post(props) {
         return <div>not found 404</div>
     }
 
-    const content = props.content ?
-        EditorState.createWithContent(Draft.convertFromRaw(props.content)) :
-        EditorState.createEmpty();
+    const content = props.content
+        ? EditorState.createWithContent(Draft.convertFromRaw(props.content))
+        : EditorState.createEmpty();
 
     return (
         <div className={classes.container}>

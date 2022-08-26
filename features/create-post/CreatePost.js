@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {createRef, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {convertToRaw, EditorState} from "draft-js";
@@ -18,9 +18,10 @@ import {emptyContentState} from "../../resorses/draftResourses";
 
 export default function CreatePost() {
     const router = useRouter();
-    const dispatch = useDispatch();
     const [title, setTitle] = useState("")
-    const [content, setContentDispatched] = useState(EditorState.createWithContent(emptyContentState))
+    const [content, setContent] = useState(EditorState.createWithContent(emptyContentState))
+
+    const ref = createRef();
 
     function publishPost(e) {
         e.preventDefault();
@@ -36,23 +37,23 @@ export default function CreatePost() {
 
     return (
         <div>
-            <form className={`${classes.form} grid-container`}>
+            <form onSubmit={e => e.preventDefault()} className={`${classes.form} grid-container`}>
                 <Layout.Container className={'grid-container__section'}>
                     <Textarea
                         placeholder={'Title'}
                         type={"title"}
                         value={title}
-                        required
                         changeHandle={setTitle}
                     />
                     <EditPanel
-                        setEditorState={setContentDispatched}
+                        setEditorState={setContent}
                         editorState={content}
                     />
                     <Editor
+                        ref={ref}
                         placeholder={'Begin your article here...'}
                         editorState={content}
-                        onChange={setContentDispatched}
+                        onChange={setContent}
                     />
                 </Layout.Container>
                 <div className={'grid-container__aside'}>
