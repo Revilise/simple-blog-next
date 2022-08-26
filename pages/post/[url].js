@@ -45,6 +45,7 @@ export default function PostDetails() {
                 <Link.Button href={'/create_post'}>create</Link.Button>
             </Header>
             <Main>
+                <Link style={{padding: "0 0 24px 0",}} href={"/"}>{"<-- back"}</Link>
                 <Main.Section>
                     { isFetch ? <Loading /> : <Post {...data} deletePost={deletePost}/>}
                 </Main.Section>
