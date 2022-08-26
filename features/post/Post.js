@@ -29,9 +29,7 @@ export default function Post(props) {
                 </div>
             </header>
             <div className={classes.content}>
-                <Layout.Container style={{borderTopRightRadius: 0, borderTopLeftRadius: 0}}>
-                    <Editor editorState={content} readOnly={true} />
-                </Layout.Container>
+                <Editor editorState={content} readOnly={true} />
             </div>
         </div>
     )

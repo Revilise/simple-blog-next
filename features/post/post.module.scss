@@ -22,8 +22,12 @@
     width: 100%;
     content: '';
   }
-  .content * {
-    font-family: Arial, sans-serif;
-    line-height: 1.6em;
+  .content {
+    background: var(--lt-plates-background);
+    border: 1px solid var(--lt-plates-border);
+    * {
+      font-family: Arial, sans-serif;
+      line-height: 1.6em;
+    }
   }
 }

@@ -25,6 +25,7 @@ export default function CreatePost() {
 
     function publishPost(e) {
         e.preventDefault();
+
         const _content = convertToRaw(content.getCurrentContent());
 
         if (_content.blocks[0].text.length && title.length) {
@@ -36,33 +37,31 @@ export default function CreatePost() {
     }
 
     return (
-        <div>
-            <form onSubmit={e => e.preventDefault()} className={`${classes.form} grid-container`}>
-                <Layout.Container className={'grid-container__section'}>
-                    <Textarea
-                        placeholder={'Title'}
-                        type={"title"}
-                        value={title}
-                        changeHandle={setTitle}
-                    />
-                    <EditPanel
-                        setEditorState={setContent}
-                        editorState={content}
-                    />
-                    <Editor
-                        ref={ref}
-                        placeholder={'Begin your article here...'}
-                        editorState={content}
-                        onChange={setContent}
-                    />
+        <div className={`${classes.form} grid-container`}>
+            <Layout.Container className={'grid-container__section'}>
+                <Textarea
+                    placeholder={'Title'}
+                    type={"title"}
+                    value={title}
+                    changeHandle={setTitle}
+                />
+                <EditPanel
+                    setEditorState={setContent}
+                    editorState={content}
+                />
+                <Editor
+                    ref={ref}
+                    placeholder={'Begin your article here...'}
+                    editorState={content}
+                    onChange={setContent}
+                />
+            </Layout.Container>
+            <div className={'grid-container__aside'}>
+                <Layout.Container>
+                    <Button onClick={publishPost}>publish</Button>
+                    <SideLinks items={createPostSideLinks}/>
                 </Layout.Container>
-                <div className={'grid-container__aside'}>
-                    <Layout.Container>
-                        <Button onClick={publishPost}>publish</Button>
-                        <SideLinks items={createPostSideLinks} />
-                    </Layout.Container>
-                </div>
-            </form>
+            </div>
         </div>
     )
 }
