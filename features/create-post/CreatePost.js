@@ -38,13 +38,13 @@ export default function CreatePost() {
         <div>
             <form className={`${classes.form} grid-container`}>
                 <Layout.Container className={'grid-container__section'}>
-                    {/*<Textarea*/}
-                    {/*    placeholder={'Title'}*/}
-                    {/*    type={"title"}*/}
-                    {/*    value={title}*/}
-                    {/*    required*/}
-                    {/*    changeHandle={setTitleDispatched}*/}
-                    {/*/>*/}
+                    <Textarea
+                        placeholder={'Title'}
+                        type={"title"}
+                        value={title}
+                        required
+                        changeHandle={setTitle}
+                    />
                     <EditPanel
                         setEditorState={setContentDispatched}
                         editorState={content}
