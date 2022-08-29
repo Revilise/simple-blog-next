@@ -7,6 +7,8 @@ function LinkHOC (props) {
 
     function onClick(e) {
         e.preventDefault();
+        if (props.handler) props.handler();
+
         router.push(props.href);
     }
 

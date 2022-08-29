@@ -1,27 +1,38 @@
-import {Editor} from 'draft-js';
-import {EditPanel} from "../EditPanel/EditPanel";
+import React from "react";
+import createImagePlugin from '@draft-js-plugins/image';
+import Editor from '@draft-js-plugins/editor';
+import {useCallback} from "react";
 
-const styleMap = {
-    'STRIKETHROUGH': {
-        textDecoration: 'line-through',
-    },
-};
+const imagePlugin = createImagePlugin();
+const plugins = [imagePlugin]
 
-export default function _Editor({editorState, setEditorState}) {
+function _Editor(props, ref) {
+
+    const styleMap = {
+        'STRIKETHROUGH': {
+            textDecoration: 'line-through',
+        },
+    };
+
+    // todo: different blocks styling
+    const blockStyleFn = useCallback((block, {state}) => {
+        console.log(block.getType())
+        switch (block.getType()) {
+            case "atomic": return "image-block"
+            default: return "block";
+        }
+    }, [])
 
     return (
-        <>
-            <EditPanel
-                setEditorState={setEditorState}
-                editorState={editorState}
-                userSelect="none" contentEditable={false}
-            />
-            <Editor
-                customStyleMap={styleMap}
-                placeholder={'Begin your article here...'}
-                editorState={editorState}
-                onChange={setEditorState}/>
-        </>
+        <Editor
+            {...props}
+            ref={ref}
+            plugins={plugins}
+            blockStyleFn={blockStyleFn}
+            customStyleMap={styleMap}
+        />
     )
 }
 
+
+export default React.forwardRef(_Editor);

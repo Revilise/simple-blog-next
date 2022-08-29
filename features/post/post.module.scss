@@ -1,0 +1,33 @@
+.container {
+  .header {
+    padding: 24px;
+    background: var(--lt-primary);
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .title {
+      color: var(--lt-sub-span-font-color);
+      font-size: 32px;
+    }
+    .date {
+      font-size: 13px;
+    }
+  }
+  .btns_panel {
+    display: flex;
+    gap: 0;
+  }
+  .plug {
+    width: 100%;
+    content: '';
+  }
+  .content {
+    background: var(--lt-plates-background);
+    border: 1px solid var(--lt-plates-border);
+    * {
+      font-family: Arial, sans-serif;
+      line-height: 1.6em;
+    }
+  }
+}

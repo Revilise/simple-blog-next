@@ -1,0 +1,34 @@
+@mixin flex {
+  gap: 16px;
+  display: flex;
+}
+
+.container {
+  @include flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  cursor: pointer;
+  border: 1px solid #F2F2F2;
+  transition: background 0.2s;
+  background: var(--lt-plates-background);
+  border-radius: 16px;
+  font-family: Arial, sans-serif;
+  &:hover {
+    background: var(--lt-hovered-plates-background);
+  }
+  .header {
+    @include flex;
+    .title {
+      width: 100%;
+    }
+    .date {
+      min-width: fit-content;
+      font-size: 13px;
+    }
+  }
+
+  .description {
+    font-family: sans-serif;
+    font-weight: normal;
+  }
+}

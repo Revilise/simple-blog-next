@@ -1,7 +1,14 @@
 .header {
   display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: 4fr 2fr 1fr;
   gap: 24px;
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  padding: 24px;
+  background: rgba(var(--lt-transperent-primary), 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--lt-bordered-btn);
   .header_title {
     font-size: 27px;
     font-weight: bolder;
