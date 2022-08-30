@@ -21,8 +21,6 @@ export default function CreatePost() {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState(EditorState.createWithContent(emptyContentState))
 
-    const ref = createRef();
-
     function publishPost(e) {
         e.preventDefault();
 
@@ -50,7 +48,6 @@ export default function CreatePost() {
                     editorState={content}
                 />
                 <Editor
-                    ref={ref}
                     placeholder={'Begin your article here...'}
                     editorState={content}
                     onChange={setContent}
