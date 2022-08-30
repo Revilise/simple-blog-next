@@ -25,6 +25,9 @@
   .content {
     background: var(--lt-plates-background);
     border: 1px solid var(--lt-plates-border);
+    & [class~="block"]:not([class~="image-block"]) {
+      padding: 8px 24px;
+    }
     * {
       font-family: Arial, sans-serif;
       line-height: 1.6em;

@@ -16,7 +16,6 @@ function _Editor(props, ref) {
 
     // todo: different blocks styling
     const blockStyleFn = useCallback((block, {state}) => {
-        console.log(block.getType())
         switch (block.getType()) {
             case "atomic": return "image-block"
             default: return "block";
